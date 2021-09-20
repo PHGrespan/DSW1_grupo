@@ -5,6 +5,11 @@ public class Destino{
 	private Long id;
 	private String nome;
 
+    public Destino(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
     public Long getId() {
         return id;
     }

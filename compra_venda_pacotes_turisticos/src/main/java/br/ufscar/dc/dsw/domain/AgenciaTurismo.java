@@ -8,6 +8,14 @@ public class AgenciaTurismo{
 	private String nome;
 	private String descricao;
 
+    public AgenciaTurismo(Long id, User user, String cnpj, String nome, String descricao) {
+        this.id = id;
+        this.user = user;
+        this.cnpj = cnpj;
+        this.nome = nome;
+        this.descricao = descricao;
+    }
+
     public Long getId() {
         return id;
     }
@@ -46,6 +54,14 @@ public class AgenciaTurismo{
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+
+    /**
+     * @return User return the user
+     */
+    public User getUser() {
+        return user;
     }
 
 }

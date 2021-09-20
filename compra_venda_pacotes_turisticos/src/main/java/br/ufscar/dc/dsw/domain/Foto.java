@@ -6,6 +6,12 @@ public class Foto{
     private Destino destino;
 	private String link;
 
+    public Foto(Long id, Destino destino, String link) {
+        this.id = id;
+        this.destino = destino;
+        this.link = link;
+    }
+
     public Long getId() {
         return id;
     }

@@ -10,6 +10,16 @@ public class Cliente{
     private String sexo;
 	private String dataNasc;
 
+    public Cliente(Long id, User user, String cpf, String nome, String telefone, String sexo, String dataNasc) {
+        this.id = id;
+        this.user = user;
+        this.cpf = cpf;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.sexo = sexo;
+        this.dataNasc = dataNasc;
+    }
+
     public Long getId() {
         return id;
     }

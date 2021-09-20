@@ -8,6 +8,14 @@ public class Compra{
     private PacoteTuristico pacote;
     private Float valor;
 
+    public Compra(Long id, Cliente cliente, AgenciaTurismo agencia, PacoteTuristico pacote, Float valor) {
+        this.id = id;
+        this.cliente = cliente;
+        this.agencia = agencia;
+        this.pacote = pacote;
+        this.valor = valor;
+    }
+
     public Long getId() {
         return id;
     }

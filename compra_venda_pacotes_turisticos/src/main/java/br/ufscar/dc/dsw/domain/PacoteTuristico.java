@@ -9,6 +9,15 @@ public class PacoteTuristico{
     private Float valor;
     private String descricao;
 
+    public PacoteTuristico(Long id, AgenciaTurismo agencia, String dataPartida, String dataChegada, Float valor, String descricao) {
+        this.id = id;
+        this.agencia = agencia;
+        this.dataPartida = dataPartida;
+        this.dataChegada = dataChegada;
+        this.valor = valor;
+        this.descricao = descricao;
+    }
+
     public Long getId() {
         return id;
     }

@@ -6,6 +6,12 @@ public class DestinoPacote{
     private Destino destino;
     private PacoteTuristico pacote;
 
+    public DestinoPacote(Long id, Destino destino, PacoteTuristico pacote) {
+        this.id = id;
+        this.destino = destino;
+        this.pacote = pacote;
+    }
+
     public Long getId() {
         return id;
     }

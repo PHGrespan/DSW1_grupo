@@ -8,20 +8,7 @@ public class User{
 	private String senha;
     private boolean isAdm;
 
-	public User(Long id) {
-		this.id = id;
-	}
-
-	public User(String nome, String login, String senha, boolean isAdm) {
-		super();
-		this.nome = nome;
-		this.login = login;
-		this.senha = senha;
-		this.isAdm = isAdm;
-	}
-
 	public User(Long id, String nome, String login, String senha, boolean isAdm) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.login = login;
