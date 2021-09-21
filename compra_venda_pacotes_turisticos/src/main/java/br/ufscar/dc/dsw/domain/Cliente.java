@@ -28,7 +28,7 @@ public class Cliente{
         this.id = id;
     }
 
-    public User getIdUser() {
+    public User getUser() {
         return user;
     }
 

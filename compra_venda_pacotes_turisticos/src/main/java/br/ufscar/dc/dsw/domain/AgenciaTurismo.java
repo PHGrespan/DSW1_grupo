@@ -24,7 +24,7 @@ public class AgenciaTurismo{
         this.id = id;
     }
 
-    public User getIdUser() {
+    public User getUser() {
         return user;
     }
 
@@ -54,14 +54,6 @@ public class AgenciaTurismo{
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-
-    /**
-     * @return User return the user
-     */
-    public User getUser() {
-        return user;
     }
 
 }
