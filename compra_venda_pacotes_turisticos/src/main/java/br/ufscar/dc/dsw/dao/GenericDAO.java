@@ -8,16 +8,13 @@ abstract public class GenericDAO {
     
     public GenericDAO() {
         try {
-        	
         	Class.forName("com.mysql.cj.jdbc.Driver");
-        	
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
     protected Connection getConnection() throws SQLException {
-    	
     	return DriverManager.getConnection("jdbc:mysql://localhost:3306/DB_PACOTES_TURISTICOS", "root", "root");
     }
 }
