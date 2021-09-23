@@ -4,10 +4,12 @@ public class Destino{
 
 	private Long id;
 	private String nome;
+    private PacoteTuristico pacote;
 
-    public Destino(Long id, String nome) {
+    public Destino(Long id, String nome, PacoteTuristico pacote) {
         this.id = id;
         this.nome = nome;
+        this.pacote = pacote;
     }
 
     public Long getId() {
@@ -25,4 +27,13 @@ public class Destino{
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public PacoteTuristico getPacote() {
+        return this.pacote;
+    }
+
+    public void setPacote(PacoteTuristico pacote) {
+        this.pacote = pacote;
+    }
+
 }

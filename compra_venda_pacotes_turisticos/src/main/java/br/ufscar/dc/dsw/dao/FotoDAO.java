@@ -5,26 +5,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import br.ufscar.dc.dsw.domain.AgenciaTurismo;
-import br.ufscar.dc.dsw.domain.User;
+import br.ufscar.dc.dsw.domain.Destino;
+import br.ufscar.dc.dsw.domain.Foto;
 
 
-public class AgenciaTurismoDAO extends GenericDAO {
+public class FotoDAO extends GenericDAO {
 
-    public void insert(AgenciaTurismo agencia, User user) {
+    public void insert(Foto foto, Destino destino) {
 
-        String sql = "INSERT INTO tb_agencia_turismo(ID_USER, CNPJ, NOME, DESCRICAO) VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO tb_foto (ID_DESTINO, LINK) VALUES(?, ?)";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, user.getId());
-            statement.setString(2, agencia.getCnpj());
-            statement.setString(3, agencia.getDescricao());
-            statement.setString(4, agencia.getDescricao());
+            statement.setLong(1, destino.getId());
+            statement.setLong(2, foto.getId());
 
             statement.executeUpdate();
 
@@ -35,11 +34,11 @@ public class AgenciaTurismoDAO extends GenericDAO {
         }
     }
 
-    public List<AgenciaTurismo> getAll() {
+    public List<Foto> getAll() {
 
-        List<AgenciaTurismo> listaAgencias = new ArrayList<>();
-
-        String sql = "SELECT ID_AGENCIA_TURISMO, ID_USER, CNPJ, NOME, DESCRICAO FROM tb_agencia_turismo";
+        List<Foto> listaFotos = new ArrayList<>();
+        Foto foto = null;
+        String sql = "SELECT ID_FOTO, ID_DESTINO, LINK FROM tb_foto";
 
         try {
         	Connection conn = this.getConnection();
@@ -47,7 +46,8 @@ public class AgenciaTurismoDAO extends GenericDAO {
             ResultSet resultSet = statement.executeQuery(); 
             
             while (resultSet.next()) {
-                listaAgencias.add(getValues(resultSet));
+                foto = getValues(resultSet);
+                listaFotos.add(foto);
             }
 
             resultSet.close();
@@ -57,17 +57,17 @@ public class AgenciaTurismoDAO extends GenericDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return listaAgencias;
+        return listaFotos;
     }
 
-    public void delete(AgenciaTurismo agencia) {
-        String sql = "DELETE FROM tb_agencia_turismo WHERE ID_AGENCIA_TURISMO=?";
+    public void delete(Foto foto) {
+        String sql = "DELETE FROM tb_foto WHERE ID_FOTO=?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, agencia.getId());
+            statement.setLong(1, foto.getId());
             statement.executeUpdate();
 
             statement.close();
@@ -77,18 +77,16 @@ public class AgenciaTurismoDAO extends GenericDAO {
         }
     }
 
-    public void update(AgenciaTurismo agencia) {
-        String sql = "UPDATE tb_agencia_turismo SET ID_USER=?, CNPJ=?, NOME=?, DESCRICAO=? WHERE ID_AGENCIA_TURISMO=?";
+    public void update(Foto foto, Destino destino) {
+        String sql = "UPDATE tb_foto SET ID_DESTINO=?, LINK=? WHERE ID_FOTO=?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, agencia.getUser().getId());
-            statement.setString(2, agencia.getCnpj());
-            statement.setString(3, agencia.getNome());
-            statement.setString(4, agencia.getDescricao());
-            statement.setLong(5, agencia.getId());
+            statement.setLong(1, destino.getId());
+            statement.setString(2, foto.getLink());
+            statement.setLong(3, foto.getId());
             statement.executeUpdate();
 
             statement.close();
@@ -98,45 +96,45 @@ public class AgenciaTurismoDAO extends GenericDAO {
         }
     }
 
-    public AgenciaTurismo get(Long id) {
+    public Foto get(Long id) {
 
-        String sql = "SELECT ID_USER, CNPJ, NOME, DESCRICAO FROM tb_agencia_turismo WHERE ID_AGENCIA_TURISMO=?";
-        AgenciaTurismo agencia = null;
-        
+        Foto foto = null;
+        String sql = "SELECT ID_FOTO, ID_DESTINO, LINK FROM tb_foto WHERE ID_FOTO=?";
+
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setLong(1, id);
+
             ResultSet resultSet = statement.executeQuery();
-            
             if (resultSet.next()) {
-                agencia = getValues(resultSet);
+                foto = getValues(resultSet);
             }
 
             resultSet.close();
             statement.close();
             conn.close();
 
-            return agencia;
+            return foto;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private AgenciaTurismo getValues(ResultSet resultSet){
+    private Foto getValues(ResultSet resultSet){
         try{
-            Long id = resultSet.getLong("ID_AGENCIA_TURISMO");
-            Long idUser = resultSet.getLong("ID_USER");
-            String cnpj = resultSet.getString("CNPJ");
-            String nome = resultSet.getString("NOME");
-            String descricao = resultSet.getString("DESCRICAO");
             
-            User user = new UserDAO().get(idUser);
+                Long id = resultSet.getLong("ID_FOTO");
+                Long idDestino = resultSet.getLong("ID_DESTINO");
+                String link = resultSet.getString("LINK");
+                
+                Destino destino = new DestinoDAO().get(idDestino);
             
-            return new AgenciaTurismo(id, user, cnpj, nome, descricao);
+            return new Foto(id, destino, link);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+    
 }

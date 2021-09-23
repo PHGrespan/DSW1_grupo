@@ -1,15 +1,17 @@
 package br.ufscar.dc.dsw.domain;
 
+import java.util.Date;
 public class PacoteTuristico{
 
 	private Long id;
 	private AgenciaTurismo agencia;
-    private String dataPartida;
-    private String dataChegada;
+    private Date dataPartida;
+    private Date dataChegada;
     private Float valor;
     private String descricao;
 
-    public PacoteTuristico(Long id, AgenciaTurismo agencia, String dataPartida, String dataChegada, Float valor, String descricao) {
+    
+    public PacoteTuristico(Long id, AgenciaTurismo agencia, Date dataPartida, Date dataChegada, Float valor, String descricao) {
         this.id = id;
         this.agencia = agencia;
         this.dataPartida = dataPartida;
@@ -34,19 +36,19 @@ public class PacoteTuristico{
         this.agencia = agencia;
     }
 
-    public String getDataPartida() {
+    public Date getDataPartida() {
         return dataPartida;
     }
 
-    public void setDataPartida(String dataPartida) {
+    public void setDataPartida(Date dataPartida) {
         this.dataPartida = dataPartida;
     }
 
-    public String getDataChegada() {
+    public Date getDataChegada() {
         return dataChegada;
     }
 
-    public void setDataChegada(String dataChegada) {
+    public void setDataChegada(Date dataChegada) {
         this.dataChegada = dataChegada;
     }
 
