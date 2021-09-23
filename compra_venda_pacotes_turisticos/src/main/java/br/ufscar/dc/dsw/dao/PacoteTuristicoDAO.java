@@ -8,13 +8,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import br.ufscar.dc.dsw.domain.AgenciaTurismo;
 import br.ufscar.dc.dsw.domain.PacoteTuristico;
-
+import br.ufscar.dc.dsw.domain.AgenciaTurismo;
 
 public class PacoteTuristicoDAO extends GenericDAO {
 
-    public void insert(PacoteTuristico  pacote, AgenciaTurismo agencia) {
+    public void insert(PacoteTuristico  pacote) {
 
         String sql = "INSERT INTO tb_pacote_turistico (ID_AGENCIA, DATA_PARTIDA, DATA_CHEGADA, VALOR, DESCRICAO) VALUES(?, ?, ?, ?, ?)";
 
@@ -22,7 +21,7 @@ public class PacoteTuristicoDAO extends GenericDAO {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, agencia.getId());
+            statement.setLong(1, pacote.getAgenciaTurismo().getId());
             statement.setDate(2, (java.sql.Date) pacote.getDataPartida());
             statement.setDate(3, (java.sql.Date) pacote.getDataChegada());
             statement.setFloat(4, pacote.getValor());

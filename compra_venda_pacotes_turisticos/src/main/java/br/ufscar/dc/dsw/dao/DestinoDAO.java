@@ -5,16 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Destino;
-import br.ufscar.dc.dsw.domain.PacoteTuristico;
+import br.ufscar.dc.dsw.domain.PacoteTuristico; 
 
 
 public class DestinoDAO extends GenericDAO {
 
-    public void insert(Destino destino, PacoteTuristico pacote) {
+    public void insert(Destino destino) {
 
         String sql = "INSERT INTO tb_destino (NOME, ID_PACOTE) VALUES(?, ?)";
 
@@ -23,7 +22,7 @@ public class DestinoDAO extends GenericDAO {
             PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setString(1, destino.getNome());
-            statement.setFloat(1, pacote.getId());
+            statement.setFloat(1, destino.getPacote().getId());
 
             statement.executeUpdate();
 
@@ -77,7 +76,7 @@ public class DestinoDAO extends GenericDAO {
         }
     }
 
-    public void update(Destino destino, PacoteTuristico pacote) {
+    public void update(Destino destino) {
         String sql = "UPDATE tb_destino SET NOME=?, ID_PACOTE=? WHERE ID_DESTINO=?";
 
         try {
@@ -85,7 +84,7 @@ public class DestinoDAO extends GenericDAO {
             PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setString(1, destino.getNome());
-            statement.setLong(2, pacote.getId());
+            statement.setLong(2, destino.getPacote().getId());
             statement.setLong(3, destino.getId());
             statement.executeUpdate();
 

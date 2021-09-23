@@ -5,16 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import br.ufscar.dc.dsw.domain.Destino;
 import br.ufscar.dc.dsw.domain.Foto;
-
+import br.ufscar.dc.dsw.domain.Destino;
 
 public class FotoDAO extends GenericDAO {
 
-    public void insert(Foto foto, Destino destino) {
+    public void insert(Foto foto) {
 
         String sql = "INSERT INTO tb_foto (ID_DESTINO, LINK) VALUES(?, ?)";
 
@@ -22,7 +20,7 @@ public class FotoDAO extends GenericDAO {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, destino.getId());
+            statement.setLong(1, foto.getDestino().getId());
             statement.setLong(2, foto.getId());
 
             statement.executeUpdate();
@@ -77,14 +75,14 @@ public class FotoDAO extends GenericDAO {
         }
     }
 
-    public void update(Foto foto, Destino destino) {
+    public void update(Foto foto) {
         String sql = "UPDATE tb_foto SET ID_DESTINO=?, LINK=? WHERE ID_FOTO=?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, destino.getId());
+            statement.setLong(1, foto.getDestino().getId());
             statement.setString(2, foto.getLink());
             statement.setLong(3, foto.getId());
             statement.executeUpdate();

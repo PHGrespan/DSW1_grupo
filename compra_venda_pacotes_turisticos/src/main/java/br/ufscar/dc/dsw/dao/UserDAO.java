@@ -10,7 +10,6 @@ import java.util.List;
 
 import br.ufscar.dc.dsw.domain.User;
 
-
 public class UserDAO extends GenericDAO {
 
     public void insert(User user) {

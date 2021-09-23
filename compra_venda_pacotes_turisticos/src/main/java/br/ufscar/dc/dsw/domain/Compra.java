@@ -40,7 +40,7 @@ public class Compra{
         this.agencia = agencia;
     }
 
-    public PacoteTuristico getIdPacoteTuristico() {
+    public PacoteTuristico getPacoteTuristico() {
         return pacote;
     }
 

@@ -13,7 +13,7 @@ import br.ufscar.dc.dsw.domain.User;
 
 public class AgenciaTurismoDAO extends GenericDAO {
 
-    public void insert(AgenciaTurismo agencia, User user) {
+    public void insert(AgenciaTurismo agencia) {
 
         String sql = "INSERT INTO tb_agencia_turismo(ID_USER, CNPJ, NOME, DESCRICAO) VALUES(?, ?, ?, ?)";
 
@@ -21,7 +21,7 @@ public class AgenciaTurismoDAO extends GenericDAO {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, user.getId());
+            statement.setLong(1, agencia.getUser().getId());
             statement.setString(2, agencia.getCnpj());
             statement.setString(3, agencia.getDescricao());
             statement.setString(4, agencia.getDescricao());

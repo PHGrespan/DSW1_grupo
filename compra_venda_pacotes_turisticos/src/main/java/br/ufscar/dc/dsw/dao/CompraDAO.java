@@ -5,19 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import br.ufscar.dc.dsw.domain.AgenciaTurismo;
-import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Compra;
+import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.domain.AgenciaTurismo;
 import br.ufscar.dc.dsw.domain.PacoteTuristico;
-import br.ufscar.dc.dsw.domain.User;
 
 
 public class CompraDAO extends GenericDAO {
 
-    public void insert(Cliente cliente, AgenciaTurismo agencia, PacoteTuristico pacote) {
+    public void insert(Compra compra) {
 
         String sql = "INSERT INTO tb_compra (ID_CLIENTE, ID_AGENCIA, ID_PACOTE_TURISTICO, VALOR) VALUES(?, ?, ?, ?)";
 
@@ -25,10 +23,10 @@ public class CompraDAO extends GenericDAO {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, cliente.getId());
-            statement.setLong(2, agencia.getId());
-            statement.setLong(3, pacote.getId());
-            statement.setFloat(4, pacote.getValor());
+            statement.setLong(1, compra.getId());
+            statement.setLong(2, compra.getAgenciaTurismo().getId());
+            statement.setLong(3, compra.getPacoteTuristico().getId());
+            statement.setFloat(4, compra.getValor());
 
             statement.executeUpdate();
 
@@ -82,16 +80,16 @@ public class CompraDAO extends GenericDAO {
         }
     }
 
-    public void update(Compra compra, Cliente cliente, AgenciaTurismo agencia, PacoteTuristico pacote) {
+    public void update(Compra compra) {
         String sql = "UPDATE tb_compra SET ID_CLIENTE=?, ID_AGENCIA=?, ID_PACOTE_TURISTICO=?, VALOR=? WHERE ID_COMPRA=?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, cliente.getId());
-            statement.setLong(2, agencia.getId());
-            statement.setLong(3, pacote.getId());
+            statement.setLong(1, compra.getCliente().getId());
+            statement.setLong(2, compra.getAgenciaTurismo().getId());
+            statement.setLong(3, compra.getPacoteTuristico().getId());
             statement.setFloat(4, compra.getValor());
             statement.setFloat(5, compra.getId());
             statement.executeUpdate();

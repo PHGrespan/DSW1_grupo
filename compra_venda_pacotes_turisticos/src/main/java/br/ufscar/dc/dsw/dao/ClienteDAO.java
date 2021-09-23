@@ -14,7 +14,7 @@ import br.ufscar.dc.dsw.domain.User;
 
 public class ClienteDAO extends GenericDAO {
 
-    public void insert(Cliente cliente, User user) {
+    public void insert(Cliente cliente) {
 
         String sql = "INSERT INTO tb_cliente (ID_USER, CPF, NOME, TELEFONE, SEXO, DATA_NASC) VALUES(?, ?, ?, ?, ?, ?)";
 
@@ -22,7 +22,7 @@ public class ClienteDAO extends GenericDAO {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, user.getId());
+            statement.setLong(1, cliente.getUser().getId());
             statement.setString(2, cliente.getCpf());
             statement.setString(3, cliente.getNome());
             statement.setString(4, cliente.getTelefone());
@@ -82,14 +82,14 @@ public class ClienteDAO extends GenericDAO {
         }
     }
 
-    public void update(Cliente cliente, User user) {
+    public void update(Cliente cliente) {
         String sql = "UPDATE tb_cliente SET ID_USER=?, CPF=?, NOME=?, TELEFONE=?, SEXO=?, DATA_NASC=? WHERE ID_CLIENTE=?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, user.getId());
+            statement.setLong(1, cliente.getUser().getId());
             statement.setString(2, cliente.getCpf());
             statement.setString(3, cliente.getNome());
             statement.setString(4, cliente.getTelefone());
