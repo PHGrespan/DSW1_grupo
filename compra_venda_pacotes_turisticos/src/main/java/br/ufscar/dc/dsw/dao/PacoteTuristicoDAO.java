@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import br.ufscar.dc.dsw.domain.PacoteTuristico;
@@ -15,7 +15,7 @@ public class PacoteTuristicoDAO extends GenericDAO {
 
     public void insert(PacoteTuristico  pacote) {
 
-        String sql = "INSERT INTO tb_pacote_turistico (ID_AGENCIA, DATA_PARTIDA, DATA_CHEGADA, VALOR, DESCRICAO) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO TB_PACOTE_TURISTICO (ID_AGENCIA, DATA_PARTIDA, DATA_CHEGADA, VALOR, DESCRICAO) VALUES(?, ?, ?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
@@ -40,7 +40,7 @@ public class PacoteTuristicoDAO extends GenericDAO {
 
         List<PacoteTuristico> listaPacotes = new ArrayList<>();
         PacoteTuristico pacote = null;
-        String sql = "SELECT ID_PACOTE_TURISTICO, ID_AGENCIA, DATA_PARTIDA, DATA_CHEGADA, VALOR, DESCRICAO FROM tb_pacote_turistico";
+        String sql = "SELECT ID_PACOTE_TURISTICO, ID_AGENCIA, DATA_PARTIDA, DATA_CHEGADA, VALOR, DESCRICAO FROM TB_PACOTE_TURISTICO";
 
         try {
         	Connection conn = this.getConnection();
@@ -63,7 +63,7 @@ public class PacoteTuristicoDAO extends GenericDAO {
     }
 
     public void delete(PacoteTuristico pacote) {
-        String sql = "DELETE FROM tb_pacote_turistico WHERE ID_PACOTE_TURISTICO=?";
+        String sql = "DELETE FROM TB_PACOTE_TURISTICO WHERE ID_PACOTE_TURISTICO=?";
 
         try {
             Connection conn = this.getConnection();
@@ -80,7 +80,7 @@ public class PacoteTuristicoDAO extends GenericDAO {
     }
 
     public void update(PacoteTuristico pacote) {
-        String sql = "UPDATE tb_pacote_turistico SET ID_AGENCIA=?, DATA_PARTIDA=?, DATA_CHEGADA=?, VALOR=?, DESCRICAO=? WHERE ID_PACOTE_TURISTICO=?";
+        String sql = "UPDATE TB_PACOTE_TURISTICO SET ID_AGENCIA=?, DATA_PARTIDA=?, DATA_CHEGADA=?, VALOR=?, DESCRICAO=? WHERE ID_PACOTE_TURISTICO=?";
 
         try {
             Connection conn = this.getConnection();
@@ -103,7 +103,7 @@ public class PacoteTuristicoDAO extends GenericDAO {
     public PacoteTuristico get(Long id) {
 
         PacoteTuristico pacote = null;
-        String sql = "SELECT ID_PACOTE_TURISTICO, ID_AGENCIA, DATA_PARTIDA, DATA_CHEGADA, VALOR, DESCRICAO FROM tb_pacote_turistico WHERE ID_PACOTE_TURISTICO=?";
+        String sql = "SELECT ID_PACOTE_TURISTICO, ID_AGENCIA, DATA_PARTIDA, DATA_CHEGADA, VALOR, DESCRICAO FROM TB_PACOTE_TURISTICO WHERE ID_PACOTE_TURISTICO=?";
 
         try {
             Connection conn = this.getConnection();
@@ -131,8 +131,8 @@ public class PacoteTuristicoDAO extends GenericDAO {
             
                 Long id = resultSet.getLong("ID_PACOTE_TURISTICO");
                 Long idAgencia = resultSet.getLong("ID_AGENCIA");
-                Date dataPartida = resultSet.getDate("DATA_PARTIDA");
-                Date dataChegada = resultSet.getDate("DATA_CHEGADA");
+                java.sql.Date dataPartida = resultSet.getDate("DATA_PARTIDA");
+                java.sql.Date dataChegada = resultSet.getDate("DATA_CHEGADA");
                 Float valor = resultSet.getFloat("VALOR");
                 String descricao = resultSet.getString("DESCRICAO");
                 

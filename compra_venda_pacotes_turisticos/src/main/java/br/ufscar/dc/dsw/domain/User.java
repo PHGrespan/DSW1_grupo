@@ -6,8 +6,13 @@ public class User{
 	private String email;
 	private String senha;
     private boolean isAdm;
+    
+    public User(Long id) {
+		this.id = id;
+	}
 
 	public User(Long id, String email, String senha, boolean isAdm) {
+		super();
 		this.id = id;
 		this.email = email;
 		this.senha = senha;
