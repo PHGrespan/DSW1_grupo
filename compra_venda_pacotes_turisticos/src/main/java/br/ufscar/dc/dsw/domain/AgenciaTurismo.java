@@ -7,13 +7,21 @@ public class AgenciaTurismo{
 	private String cnpj;
 	private String nome;
 	private String descricao;
+	
+	 public AgenciaTurismo(Long id) {
+	        this.id = id;
+	    }
 
-    public AgenciaTurismo(Long id, User user, String cnpj, String nome, String descricao) {
-        this.id = id;
+    public AgenciaTurismo(User user, String cnpj, String nome, String descricao) {
         this.user = user;
         this.cnpj = cnpj;
         this.nome = nome;
         this.descricao = descricao;
+    }
+    
+    public AgenciaTurismo(Long id, User user, String cnpj, String nome, String descricao) {
+        this(user, cnpj, nome, descricao);
+        this.id = id;
     }
 
     public Long getId() {

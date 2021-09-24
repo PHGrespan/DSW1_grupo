@@ -14,7 +14,7 @@ public class UserDAO extends GenericDAO {
 
     public void insert(User user) {
 
-        String sql = "INSERT INTO tb_user (EMAIL, SENHA, IS_ADM) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO TB_USER (EMAIL, SENHA, IS_ADM) VALUES(?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
@@ -37,7 +37,7 @@ public class UserDAO extends GenericDAO {
 
         List<User> listaUsers = new ArrayList<>();
 
-        String sql = "SELECT ID_USER, EMAIL, SENHA, IS_ADM FROM tb_user";
+        String sql = "SELECT ID_USER, EMAIL, SENHA, IS_ADM FROM TB_USER";
 
         try {
             Connection conn = this.getConnection();
@@ -67,7 +67,7 @@ public class UserDAO extends GenericDAO {
     }
 
     public void delete(User user) {
-        String sql = "DELETE FROM tb_user WHERE ID_USER=?";
+        String sql = "DELETE FROM TB_USER WHERE ID_USER=?";
 
         try {
             Connection conn = this.getConnection();
@@ -84,7 +84,7 @@ public class UserDAO extends GenericDAO {
     }
 
     public void update(User user) {
-        String sql = "UPDATE tb_user SET EMAIL=?, SENHA=?, IS_ADM=? WHERE ID_USER=?";
+        String sql = "UPDATE TB_USER SET EMAIL=?, SENHA=?, IS_ADM=? WHERE ID_USER=?";
 
         try {
             Connection conn = this.getConnection();
@@ -105,7 +105,7 @@ public class UserDAO extends GenericDAO {
 
     public User get(Long id) {
         User user = null;
-        String sql = "SELECT ID_USER, EMAIL, SENHA, IS_ADM FROM tb_user WHERE ID_USER=?";
+        String sql = "SELECT ID_USER, EMAIL, SENHA, IS_ADM FROM TB_USER WHERE ID_USER=?";
 
         try {
             Connection conn = this.getConnection();
@@ -116,6 +116,34 @@ public class UserDAO extends GenericDAO {
             if (resultSet.next()) {
                 
                 String email = resultSet.getString("EMAIL");
+                String senha = resultSet.getString("SENHA");
+                Boolean isAdm = resultSet.getBoolean("IS_ADM");
+
+                user = new User(id, email, senha, isAdm);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+
+            return user;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public User getLogin(String email) {
+        User user = null;
+        String sql = "SELECT ID_USER, EMAIL, SENHA, IS_ADM FROM TB_USER WHERE EMAIL=?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+            	Long id = resultSet.getLong("ID_USER");
                 String senha = resultSet.getString("SENHA");
                 Boolean isAdm = resultSet.getBoolean("IS_ADM");
 

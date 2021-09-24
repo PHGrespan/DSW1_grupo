@@ -15,7 +15,7 @@ public class AgenciaTurismoDAO extends GenericDAO {
 
     public void insert(AgenciaTurismo agencia) {
 
-        String sql = "INSERT INTO tb_agencia_turismo(ID_USER, CNPJ, NOME, DESCRICAO) VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO TB_AGENCIA_TURISMO(ID_USER, CNPJ, NOME, DESCRICAO) VALUES(?, ?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
@@ -38,8 +38,8 @@ public class AgenciaTurismoDAO extends GenericDAO {
     public List<AgenciaTurismo> getAll() {
 
         List<AgenciaTurismo> listaAgencias = new ArrayList<>();
-
-        String sql = "SELECT ID_AGENCIA_TURISMO, ID_USER, CNPJ, NOME, DESCRICAO FROM tb_agencia_turismo";
+        AgenciaTurismo agencia = null;
+        String sql = "SELECT ID_AGENCIA_TURISMO, ID_USER, CNPJ, NOME, DESCRICAO FROM TB_AGENCIA_TURISMO";
 
         try {
         	Connection conn = this.getConnection();
@@ -47,7 +47,8 @@ public class AgenciaTurismoDAO extends GenericDAO {
             ResultSet resultSet = statement.executeQuery(); 
             
             while (resultSet.next()) {
-                listaAgencias.add(getValues(resultSet));
+            	agencia = getValues(resultSet);
+                listaAgencias.add(agencia);
             }
 
             resultSet.close();
@@ -61,7 +62,7 @@ public class AgenciaTurismoDAO extends GenericDAO {
     }
 
     public void delete(AgenciaTurismo agencia) {
-        String sql = "DELETE FROM tb_agencia_turismo WHERE ID_AGENCIA_TURISMO=?";
+        String sql = "DELETE FROM TB_AGENCIA_TURISMO WHERE ID_AGENCIA_TURISMO=?";
 
         try {
             Connection conn = this.getConnection();
@@ -78,7 +79,7 @@ public class AgenciaTurismoDAO extends GenericDAO {
     }
 
     public void update(AgenciaTurismo agencia) {
-        String sql = "UPDATE tb_agencia_turismo SET ID_USER=?, CNPJ=?, NOME=?, DESCRICAO=? WHERE ID_AGENCIA_TURISMO=?";
+        String sql = "UPDATE TB_AGENCIA_TURISMO SET ID_USER=?, CNPJ=?, NOME=?, DESCRICAO=? WHERE ID_AGENCIA_TURISMO=?";
 
         try {
             Connection conn = this.getConnection();
@@ -88,7 +89,6 @@ public class AgenciaTurismoDAO extends GenericDAO {
             statement.setString(2, agencia.getCnpj());
             statement.setString(3, agencia.getNome());
             statement.setString(4, agencia.getDescricao());
-            statement.setLong(5, agencia.getId());
             statement.executeUpdate();
 
             statement.close();
@@ -100,7 +100,7 @@ public class AgenciaTurismoDAO extends GenericDAO {
 
     public AgenciaTurismo get(Long id) {
 
-        String sql = "SELECT ID_USER, CNPJ, NOME, DESCRICAO FROM tb_agencia_turismo WHERE ID_AGENCIA_TURISMO=?";
+        String sql = "SELECT ID_USER, CNPJ, NOME, DESCRICAO FROM TB_AGENCIA_TURISMO WHERE ID_AGENCIA_TURISMO=?";
         AgenciaTurismo agencia = null;
         
         try {
@@ -126,7 +126,7 @@ public class AgenciaTurismoDAO extends GenericDAO {
 
     private AgenciaTurismo getValues(ResultSet resultSet){
         try{
-            Long id = resultSet.getLong("ID_AGENCIA_TURISMO");
+           
             Long idUser = resultSet.getLong("ID_USER");
             String cnpj = resultSet.getString("CNPJ");
             String nome = resultSet.getString("NOME");
@@ -134,7 +134,7 @@ public class AgenciaTurismoDAO extends GenericDAO {
             
             User user = new UserDAO().get(idUser);
             
-            return new AgenciaTurismo(id, user, cnpj, nome, descricao);
+            return new AgenciaTurismo(user, cnpj, nome, descricao);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
