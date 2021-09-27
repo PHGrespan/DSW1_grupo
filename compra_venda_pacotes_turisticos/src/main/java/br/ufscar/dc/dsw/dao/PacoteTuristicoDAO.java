@@ -129,8 +129,8 @@ public class PacoteTuristicoDAO extends GenericDAO {
     private PacoteTuristico getValues(ResultSet resultSet){
         try{
             
-                Long id = resultSet.getLong("ID_PACOTE_TURISTICO");
-                Long idAgencia = resultSet.getLong("ID_AGENCIA");
+                long id = resultSet.getLong("ID_PACOTE_TURISTICO");
+                long idAgencia = resultSet.getLong("ID_AGENCIA");
                 java.sql.Date dataPartida = resultSet.getDate("DATA_PARTIDA");
                 java.sql.Date dataChegada = resultSet.getDate("DATA_CHEGADA");
                 Float valor = resultSet.getFloat("VALOR");

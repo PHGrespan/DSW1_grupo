@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/pacotes/*")
+@WebServlet(urlPatterns = {"/pacotes/*"})
 public class PacotesController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -37,13 +37,7 @@ public class PacotesController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		PacoteTuristico pacote = (PacoteTuristico) request.getSession().getAttribute("usuarioLogado");
-		Erro erros = new Erro();
-
-		if (pacote == null) {
-			response.sendRedirect(request.getContextPath());
-			return;
-		} 
+    	Erro erros = new Erro();
 		
         String action = request.getPathInfo();
         if (action == null) {
@@ -64,8 +58,8 @@ public class PacotesController extends HttpServlet {
     
     private void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<PacoteTuristico> listaPacotes = dao.getAll();
-		request.setAttribute("listapacotes", listaPacotes);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/pacotes/lista.jsp");
+		request.setAttribute("listaPacotes", listaPacotes);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/lista_pacotes.jsp");
 		dispatcher.forward(request, response);
 	}
 }

@@ -3,7 +3,9 @@ package br.ufscar.dc.dsw.domain;
 public class AgenciaTurismo{
 
 	private Long id;
-	private User user;
+	private String email;
+	private String senha;
+	private String isAdm;
 	private String cnpj;
 	private String nome;
 	private String descricao;
@@ -12,16 +14,25 @@ public class AgenciaTurismo{
 	        this.id = id;
 	    }
 
-    public AgenciaTurismo(User user, String cnpj, String nome, String descricao) {
-        this.user = user;
+    public AgenciaTurismo(String email, String senha, String isAdm, String cnpj, String nome, String descricao) {
+        super();
+    	this.email = email;
+    	this.senha = senha;
+    	this.isAdm = isAdm;
         this.cnpj = cnpj;
         this.nome = nome;
         this.descricao = descricao;
     }
     
-    public AgenciaTurismo(Long id, User user, String cnpj, String nome, String descricao) {
-        this(user, cnpj, nome, descricao);
+    public AgenciaTurismo(Long id, String email, String senha, String isAdm, String cnpj, String nome, String descricao) {
+        super();
         this.id = id;
+        this.email = email;
+    	this.senha = senha;
+    	this.isAdm = isAdm;
+        this.cnpj = cnpj;
+        this.nome = nome;
+        this.descricao = descricao;
     }
 
     public Long getId() {
@@ -31,13 +42,29 @@ public class AgenciaTurismo{
     public void setId(Long id) {
         this.id = id;
     }
-
-    public User getUser() {
-        return user;
+    
+    public String getEmail() {
+    	return email;
     }
-
-    public void setUser(User user) {
-        this.user = user;
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public String getSenha() {
+    	return senha;
+    }
+    
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
+    public String getIsAdm() {
+    	return isAdm;
+    }
+    
+    public void setIsAdm(String isAdm) {
+        this.isAdm = isAdm;
     }
 
     public String getCnpj() {

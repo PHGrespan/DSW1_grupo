@@ -16,18 +16,21 @@ public class ClienteDAO extends GenericDAO {
 
     public void insert(Cliente cliente) {
 
-        String sql = "INSERT INTO tb_cliente (ID_USER, CPF, NOME, TELEFONE, SEXO, DATA_NASC) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO TB_CLIENTE (ID_USER, EMAIL, SENHA, CPF, IS_ADM, NOME, TELEFONE, SEXO, DATA_NASC) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, cliente.getUser().getId());
-            statement.setString(2, cliente.getCpf());
-            statement.setString(3, cliente.getNome());
-            statement.setString(4, cliente.getTelefone());
-            statement.setString(5, cliente.getSexo());
-            statement.setString(6, cliente.getDataNasc());
+            statement.setLong(1, cliente.getId());
+            statement.setString(2, cliente.getEmail());
+            statement.setString(3, cliente.getSenha());
+            statement.setString(4, cliente.getIsAdm()); 
+            statement.setString(5, cliente.getCpf());
+            statement.setString(6, cliente.getNome());
+            statement.setString(7, cliente.getTelefone());
+            statement.setString(8, cliente.getSexo());
+            statement.setString(9, cliente.getDataNasc());
             statement.executeUpdate();
 
             statement.close();
@@ -43,7 +46,7 @@ public class ClienteDAO extends GenericDAO {
         List<Cliente> listaClientes = new ArrayList<>();
         Cliente cliente = null;
 
-        String sql = "SELECT ID_CLIENTE, ID_USER, CPF, NOME, TELEFONE, SEXO, DATA_NASC FROM tb_cliente";
+        String sql = "SELECT ID_CLIENTE, EMAIL, SENHA, CPF, IS_ADM, NOME, TELEFONE, SEXO, DATA_NASC FROM TB_CLIENTE";
 
         try {
             Connection conn = this.getConnection();
@@ -66,7 +69,7 @@ public class ClienteDAO extends GenericDAO {
     }
 
     public void delete(Cliente cliente) {
-        String sql = "DELETE FROM tb_client WHERE ID_CLIENTE=?";
+        String sql = "DELETE FROM TB_CLIENTE WHERE ID_CLIENTE=?";
 
         try {
             Connection conn = this.getConnection();
@@ -83,19 +86,21 @@ public class ClienteDAO extends GenericDAO {
     }
 
     public void update(Cliente cliente) {
-        String sql = "UPDATE tb_cliente SET ID_USER=?, CPF=?, NOME=?, TELEFONE=?, SEXO=?, DATA_NASC=? WHERE ID_CLIENTE=?";
+        String sql = "UPDATE TB_CLIENTE SET EMAIL=?, SENHA=?, CPF=?, IS_ADM=?, NOME=?, TELEFONE=?, SEXO=?, DATA_NASC=? WHERE ID_CLIENTE=?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, cliente.getUser().getId());
-            statement.setString(2, cliente.getCpf());
-            statement.setString(3, cliente.getNome());
-            statement.setString(4, cliente.getTelefone());
-            statement.setString(5, cliente.getSexo());
-            statement.setString(6, cliente.getDataNasc());
-            statement.setLong(7, cliente.getId());
+            statement.setLong(1, cliente.getId());
+            statement.setString(2, cliente.getEmail());
+            statement.setString(3, cliente.getSenha());
+            statement.setString(4, cliente.getIsAdm()); 
+            statement.setString(5, cliente.getCpf());
+            statement.setString(6, cliente.getNome());
+            statement.setString(7, cliente.getTelefone());
+            statement.setString(8, cliente.getSexo());
+            statement.setString(9, cliente.getDataNasc());
             statement.executeUpdate();
 
             statement.close();
@@ -108,13 +113,49 @@ public class ClienteDAO extends GenericDAO {
     public Cliente get(Long id) {
 
         Cliente cliente = null;
-        String sql = "SELECT ID_USER, CPF, NOME, TELEFONE, SEXO, DATA_NASC FROM tb_cliente WHERE ID_CLIENTE=?";
+        String sql = "SELECT ID_CLIENTE, EMAIL, SENHA, CPF, IS_ADM, NOME, TELEFONE, SEXO, DATA_NASC FROM TB_CLIENTE WHERE ID_CLIENTE=?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+            	String email = resultSet.getString("EMAIL");
+                String senha = resultSet.getString("SENHA");
+                String cpf = resultSet.getString("CPF");
+                String isAdm = resultSet.getString("IS_ADM");
+                String nome = resultSet.getString("NOME");
+                String telefone = resultSet.getString("TELEFONE");
+                String sexo = resultSet.getString("SEXO");
+                String dataNasc = resultSet.getString("DATA_NASC");
+                
+                cliente = new Cliente(id, email, senha, cpf, isAdm, nome, telefone, sexo, dataNasc);
+                
+                
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+            return cliente;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public Cliente getLogin(String id) {
+
+        Cliente cliente = null;
+        String sql = "SELECT ID_CLIENTE, EMAIL, SENHA, CPF, IS_ADM, NOME, TELEFONE, SEXO, DATA_NASC FROM TB_CLIENTE WHERE EMAIL=?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, id);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
@@ -133,17 +174,19 @@ public class ClienteDAO extends GenericDAO {
 
     private Cliente getValues(ResultSet resultSet){
         try{
-            long id = resultSet.getLong("ID_CLIENTE");
-            long idUser = resultSet.getLong("ID_USER");
+            Long id = resultSet.getLong("ID_CLIENTE");
+            String email = resultSet.getString("EMAIL");
+            String senha = resultSet.getString("SENHA");
             String cpf = resultSet.getString("CPF");
+            String isAdm = resultSet.getString("IS_ADM");
             String nome = resultSet.getString("NOME");
             String telefone = resultSet.getString("TELEFONE");
             String sexo = resultSet.getString("SEXO");
             String dataNasc = resultSet.getString("DATA_NASC");
 
-            User user = new UserDAO().get(idUser);
+           
             
-            return new Cliente(id, user, cpf, nome, telefone, sexo, dataNasc);
+            return new Cliente(id, email, senha, cpf, isAdm, nome, telefone, sexo, dataNasc);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

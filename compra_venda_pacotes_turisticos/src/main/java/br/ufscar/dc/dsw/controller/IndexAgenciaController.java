@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.ufscar.dc.dsw.dao.ClienteDAO;
+import br.ufscar.dc.dsw.dao.AgenciaTurismoDAO;
 import br.ufscar.dc.dsw.dao.PacoteTuristicoDAO;
 import br.ufscar.dc.dsw.dao.UserDAO;
-import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.PacoteTuristico;
 import br.ufscar.dc.dsw.domain.User;
+import br.ufscar.dc.dsw.domain.AgenciaTurismo;
 import br.ufscar.dc.dsw.util.Erro;
 
-@WebServlet(name = "Index", urlPatterns = { "/log.jsp", "/logout.jsp" })
-public class IndexController extends HttpServlet {
+@WebServlet(name = "Index_agencia", urlPatterns = { "/log_agencia.jsp", "/logout_agencia.jsp" })
+public class IndexAgenciaController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -37,16 +37,13 @@ public class IndexController extends HttpServlet {
 				erros.add("Senha não informada!");
 			}
 			if (!erros.isExisteErros()) {
-				ClienteDAO dao = new ClienteDAO();
-				Cliente usuario = dao.getLogin(login);
-				if (usuario != null) {
-					if (usuario.getSenha().equalsIgnoreCase(senha)) {
-						request.getSession().setAttribute("usuarioLogado", usuario);
-						if (usuario.getIsAdm().equalsIgnoreCase("ADM")) {
-							response.sendRedirect("usuarios/");
-						} else {
-							response.sendRedirect("compras/");
-						}
+				AgenciaTurismoDAO dao = new AgenciaTurismoDAO();
+				AgenciaTurismo agencia = dao.getLogin(login);
+				if (agencia != null) {
+					if (agencia.getSenha().equalsIgnoreCase(senha)) {
+						request.getSession().setAttribute("agenciaLogada", agencia);
+						response.sendRedirect("agencia/");
+						
 						return;
 					} else {
 						erros.add("Senha inválida!");
@@ -60,7 +57,7 @@ public class IndexController extends HttpServlet {
 
 		request.setAttribute("mensagens", erros);
 
-		String URL = "/login.jsp";
+		String URL = "/login_agencia.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(URL);
 		rd.forward(request, response);
 	}

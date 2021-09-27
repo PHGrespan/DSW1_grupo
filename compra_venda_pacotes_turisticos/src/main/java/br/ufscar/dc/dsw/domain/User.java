@@ -6,17 +6,27 @@ public class User{
 	private String email;
 	private String senha;
     private boolean isAdm;
+    private String func;
     
     public User(Long id) {
 		this.id = id;
 	}
 
-	public User(Long id, String email, String senha, boolean isAdm) {
+	public User(String email, String senha, boolean isAdm, String func) {
+		super();
+		this.email = email;
+		this.senha = senha;
+		this.isAdm = isAdm;
+		this.func = func;
+	}
+	
+	public User(Long id, String email, String senha, boolean isAdm, String func) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.senha = senha;
 		this.isAdm = isAdm;
+		this.func = func;
 	}
 
 	public Long getId() {
@@ -49,5 +59,13 @@ public class User{
 
 	public void setIsAdm(boolean isAdm) {
 		this.isAdm = isAdm;
+	}
+	
+	public String getFunc() {
+		return func;
+	}
+
+	public void setFunc(String func) {
+		this.func = func;
 	}
 }
