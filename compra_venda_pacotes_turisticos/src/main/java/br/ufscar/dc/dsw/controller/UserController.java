@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.ufscar.dc.dsw.dao.ClienteDAO;
 import br.ufscar.dc.dsw.dao.UserDAO;
+import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.User;
 import br.ufscar.dc.dsw.util.Erro;
 
@@ -19,11 +21,11 @@ public class UserController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private UserDAO dao;
+	private ClienteDAO dao;
 
 	@Override
 	public void init() {
-		dao = new UserDAO();
+		dao = new ClienteDAO();
 	}
 
 	@Override
@@ -36,13 +38,13 @@ public class UserController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		User usuario = (User) request.getSession().getAttribute("usuarioLogado");
+		Cliente usuario = (Cliente) request.getSession().getAttribute("usuarioLogado");
 		Erro erros = new Erro();
 
 		if (usuario == null) {
 			response.sendRedirect(request.getContextPath());
 			return;
-		} else if (!usuario.getIsAdm() == true) {
+		} else if (!usuario.getIsAdm().equalsIgnoreCase("ADM")) {
 			erros.add("Acesso não autorizado!");
 			erros.add("Apenas Papel [ADMIN] tem acesso a essa página");
 			request.setAttribute("mensagens", erros);
@@ -83,7 +85,7 @@ public class UserController extends HttpServlet {
 	}
 
 	private void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<User> listaUsuarios = dao.getAll();
+		List<Cliente> listaUsuarios = dao.getAll();
 		request.setAttribute("listaUsuarios", listaUsuarios);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/usuario/lista.jsp");
 		dispatcher.forward(request, response);
@@ -98,7 +100,7 @@ public class UserController extends HttpServlet {
 	private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Long id = Long.parseLong(request.getParameter("id"));
-		User usuario = dao.get(id);
+		Cliente usuario = dao.get(id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/usuario/formulario.jsp");
 		request.setAttribute("usuario", usuario);
 		dispatcher.forward(request, response);
@@ -107,12 +109,17 @@ public class UserController extends HttpServlet {
 	private void insere(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		Long id = Long.parseLong(request.getParameter("ID_USER"));
-		String email = request.getParameter("EMAIL");
-		String senha = request.getParameter("SENHA");
-		Boolean papel = Boolean.parseBoolean(request.getParameter("IS_ADM"));
 		
-		User usuario = new User(id, email, senha, papel);
+		String email = request.getParameter("email");
+		String senha = request.getParameter("senha");
+		String cpf = request.getParameter("cpf");
+		String isAdm = request.getParameter("isAdm");
+		String nome = request.getParameter("nome");
+		String telefone = request.getParameter("telefone");
+		String sexo = request.getParameter("sexo");
+		String data = request.getParameter("dataNasc");
+		
+		Cliente usuario = new Cliente(email, senha, cpf, isAdm, nome, telefone, sexo, data);
 
 		dao.insert(usuario);
 		response.sendRedirect("lista");
@@ -122,12 +129,17 @@ public class UserController extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		Long id = Long.parseLong(request.getParameter("ID_USER"));
-		String email = request.getParameter("EMAIL");
+		Long id = Long.parseLong(request.getParameter("id"));
+		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
-		Boolean papel = Boolean.parseBoolean(request.getParameter("IS_ADM"));
+		String cpf = request.getParameter("cpf");
+		String isAdm = request.getParameter("isAdm");
+		String nome = request.getParameter("nome");
+		String telefone = request.getParameter("telefone");
+		String sexo = request.getParameter("sexo");
+		String data = request.getParameter("data");
 		
-		User usuario = new User(id, email, senha, papel);
+		Cliente usuario = new Cliente(id, email, senha, cpf, isAdm, nome, telefone, sexo, data);
 
 		dao.update(usuario);
 		response.sendRedirect("lista");
@@ -136,7 +148,7 @@ public class UserController extends HttpServlet {
 	private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Long id = Long.parseLong(request.getParameter("id"));
 
-		User usuario = new User(id);
+		Cliente usuario = new Cliente(id);
 		dao.delete(usuario);
 		response.sendRedirect("lista");
 	}

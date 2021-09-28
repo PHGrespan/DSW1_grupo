@@ -24,7 +24,7 @@
                 </ul>
             </div>
         </c:if>
-        <form method="post" action="log.jsp">
+        <form method="post" action="log_agencia.jsp">
             <table>
                 <tr>
                     <th><fmt:message key="user.login" />:</th>

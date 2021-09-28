@@ -26,7 +26,7 @@
 				</a>
 				<br/>
 				<br/>
-				<a href="/<%=contextPath%>/usuarios/cadastro"> 
+				<a href="/<%=contextPath%>/agencia/cadastro"> 
 					<fmt:message key="user.create" />
 				</a> 
 			</h2>
@@ -37,29 +37,27 @@
 		<div align="center">
 			<table border="1">
 				<tr>
-					<th><fmt:message key="user.id" /></th>
-					<th><fmt:message key="user.login" /></th>
-					<th><fmt:message key="user.password" /></th>
-					<th><fmt:message key="user.isAdm" /></th>
-					<th><fmt:message key="user.nome" /></th>
-					<th><fmt:message key="user.telefone" /></th>
-					<th><fmt:message key="user.sexo" /></th>
-					<th><fmt:message key="user.dataNasc" /></th>
+					<th><fmt:message key="agencia.id" /></th>
+					<th><fmt:message key="agencia.email" /></th>
+					<th><fmt:message key="agencia.senha" /></th>
+					<th><fmt:message key="agencia.isAdm" /></th>
+					<th><fmt:message key="agencia.cnpj" /></th>
+					<th><fmt:message key="agencia.nome" /></th>
+					<th><fmt:message key="agencia.desc" /></th>
 					<th><fmt:message key="user.update" /></th>
 					<th><fmt:message key="user.delete" /></th>
 				</tr>
-				<c:forEach var="usuario" items="${requestScope.listaUsuarios}">
+				<c:forEach var="agencia" items="${requestScope.listaAgencia}">
 					<tr>
-						<td><c:out value="${usuario.id}" /></td>
-						<td><c:out value="${usuario.email}" /></td>
-						<td><c:out value="${usuario.senha}" /></td>
-						<td><c:out value="${usuario.isAdm}" /></td>
-						<td><c:out value="${usuario.nome}" /></td>
-						<td><c:out value="${usuario.telefone}" /></td>
-						<td><c:out value="${usuario.sexo}" /></td>
-						<td><c:out value="${usuario.dataNasc}" /></td>
+						<td><c:out value="${agencia.id}" /></td>
+						<td><c:out value="${agencia.email}" /></td>
+						<td><c:out value="${agencia.senha}" /></td>
+						<td><c:out value="${agencia.isAdm}" /></td>
+						<td><c:out value="${agencia.cnpj}" /></td>
+						<td><c:out value="${agencia.nome}" /></td>
+						<td><c:out value="${agencia.descricao}" /></td>
 						<td><p><a
-							href="/<%= contextPath %>/usuarios/edicao?id=<c:out value='${usuario.id}' />">
+							href="/<%= contextPath %>/agencia/edicao?id=<c:out value='${agencia.id}' />">
 								<fmt:message key="user.update" />
 								</a>
 							</p> 

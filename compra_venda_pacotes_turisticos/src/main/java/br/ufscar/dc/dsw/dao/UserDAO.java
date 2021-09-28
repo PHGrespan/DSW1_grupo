@@ -14,7 +14,7 @@ public class UserDAO extends GenericDAO {
 
     public void insert(User user) {
 
-        String sql = "INSERT INTO TB_USER (EMAIL, SENHA, IS_ADM) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO TB_USER (EMAIL, SENHA, IS_ADM, FUNC) VALUES(?, ?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
@@ -23,6 +23,7 @@ public class UserDAO extends GenericDAO {
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getSenha());
             statement.setBoolean(3, user.getIsAdm());
+            statement.setString(4, user.getFunc());
 
             statement.executeUpdate();
             statement.close();
@@ -37,7 +38,7 @@ public class UserDAO extends GenericDAO {
 
         List<User> listaUsers = new ArrayList<>();
 
-        String sql = "SELECT ID_USER, EMAIL, SENHA, IS_ADM FROM TB_USER";
+        String sql = "SELECT ID_USER, EMAIL, SENHA, IS_ADM, FUNC FROM TB_USER";
 
         try {
             Connection conn = this.getConnection();
@@ -50,8 +51,9 @@ public class UserDAO extends GenericDAO {
                 String email = resultSet.getString("EMAIL");
                 String senha = resultSet.getString("SENHA");
                 Boolean isAdm = resultSet.getBoolean("IS_ADM");
+                String func = resultSet.getString("FUNC");
 
-                User user = new User(id, email, senha, isAdm);
+                User user = new User(id, email, senha, isAdm, func);
                 listaUsers.add(user);
             }
 
@@ -84,7 +86,7 @@ public class UserDAO extends GenericDAO {
     }
 
     public void update(User user) {
-        String sql = "UPDATE TB_USER SET EMAIL=?, SENHA=?, IS_ADM=? WHERE ID_USER=?";
+        String sql = "UPDATE TB_USER SET EMAIL=?, SENHA=?, IS_ADM=?, FUNC=? WHERE ID_USER=?";
 
         try {
             Connection conn = this.getConnection();
@@ -93,7 +95,8 @@ public class UserDAO extends GenericDAO {
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getSenha());
             statement.setBoolean(3, user.getIsAdm());
-            statement.setLong(4, user.getId());
+            statement.setString(4, user.getFunc());
+            statement.setLong(5, user.getId());
             statement.executeUpdate();
 
             statement.close();
@@ -105,7 +108,7 @@ public class UserDAO extends GenericDAO {
 
     public User get(Long id) {
         User user = null;
-        String sql = "SELECT ID_USER, EMAIL, SENHA, IS_ADM FROM TB_USER WHERE ID_USER=?";
+        String sql = "SELECT ID_USER, EMAIL, SENHA, IS_ADM, FUNC FROM TB_USER WHERE ID_USER=?";
 
         try {
             Connection conn = this.getConnection();
@@ -118,8 +121,9 @@ public class UserDAO extends GenericDAO {
                 String email = resultSet.getString("EMAIL");
                 String senha = resultSet.getString("SENHA");
                 Boolean isAdm = resultSet.getBoolean("IS_ADM");
+                String func = resultSet.getString("FUNC");
 
-                user = new User(id, email, senha, isAdm);
+                user = new User(id, email, senha, isAdm, func);
             }
 
             resultSet.close();
@@ -134,7 +138,7 @@ public class UserDAO extends GenericDAO {
     
     public User getLogin(String email) {
         User user = null;
-        String sql = "SELECT ID_USER, EMAIL, SENHA, IS_ADM FROM TB_USER WHERE EMAIL=?";
+        String sql = "SELECT ID_USER, EMAIL, SENHA, IS_ADM, FUNC FROM TB_USER WHERE EMAIL=?";
 
         try {
             Connection conn = this.getConnection();
@@ -146,8 +150,9 @@ public class UserDAO extends GenericDAO {
             	Long id = resultSet.getLong("ID_USER");
                 String senha = resultSet.getString("SENHA");
                 Boolean isAdm = resultSet.getBoolean("IS_ADM");
+                String func = resultSet.getString("FUNC");
 
-                user = new User(id, email, senha, isAdm);
+                user = new User(id, email, senha, isAdm, func);
             }
 
             resultSet.close();
