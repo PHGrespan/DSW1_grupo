@@ -1,5 +1,5 @@
 Não logado:
-    - listar pacotes comprados
+    - listar pacotes turisticos de todas as agencias (ainda não comprados)
         opção de filtrar destino, por agênciade turismo ou por data de partida.
 
 Cliente:
@@ -7,7 +7,8 @@ Cliente:
         - criar usuario
         - criar agencia
     IS_ADM = 'NAO'
-        - listar pacotes turisticos de todas as agencias
+        - listar pacotes turisticos de todas as agencias (ainda não comprados) (REAPORVEITAR DO NAO LOGADO)
+            opção de filtrar destino, por agênciade turismo ou por data de partida.
         - incluir compra de pacote
         - listar pacotes comprados (filtrar por CPF)
 Agencia:
