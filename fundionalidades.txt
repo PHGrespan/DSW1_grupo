@@ -1,3 +1,7 @@
+Não logado:
+    - listar pacotes comprados
+        opção de filtrar destino, por agênciade turismo ou por data de partida.
+
 Cliente:
     IS_ADM = 'SIM'
         - criar usuario
