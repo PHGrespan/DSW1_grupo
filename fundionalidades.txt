@@ -1,0 +1,12 @@
+Cliente:
+    IS_ADM = 'SIM'
+        - criar usuario
+        - criar agencia
+    IS_ADM = 'NAO'
+        - listar pacotes turisticos de todas as agencias
+        - incluir compra de pacote
+        - listar pacotes comprados (filtrar por CPF)
+Agencia:
+    - criar pacote turístico
+    - listar pacotes turisticos APENAS da agencia (filtrar por CNPJ)
+        opção de filtrar por pacotes com data de partida posterior a atual
