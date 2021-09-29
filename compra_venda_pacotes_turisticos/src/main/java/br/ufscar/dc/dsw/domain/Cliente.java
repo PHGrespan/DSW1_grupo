@@ -2,7 +2,6 @@ package br.ufscar.dc.dsw.domain;
 
 public class Cliente{
 
-	private Long id;
 	private String email;
 	private String senha;
 	private String cpf;
@@ -11,28 +10,10 @@ public class Cliente{
 	private String telefone;
     private String sexo;
 	private String dataNasc;
-	
-	public Cliente(Long id) {
-		this.id = id;
-	}
-	
+    
     public Cliente(String email, String senha, String cpf, String isAdm, String nome, String telefone, String sexo, String dataNasc) {
-    	super();
-    	this.email = email;
-    	this.senha = senha;
-        this.cpf = cpf;
-        this.isAdm = isAdm;
-        this.nome = nome;
-        this.telefone = telefone;
-        this.sexo = sexo;
-        this.dataNasc = dataNasc;
-    }
-    
-    public Cliente(Long id, String email, String senha, String cpf, String isAdm, String nome, String telefone, String sexo, String dataNasc) {
-    	super();
-    	this.id = id;
-    	this.email = email;
-    	this.senha = senha;
+        this.email = email;
+        this.senha = senha;
         this.cpf = cpf;
         this.isAdm = isAdm;
         this.nome = nome;
@@ -41,48 +22,41 @@ public class Cliente{
         this.dataNasc = dataNasc;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
     public String getEmail() {
-    	return email;
+        return this.email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public String getSenha() {
-    	return senha;
+        return this.senha;
     }
-    
+
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-    public String getIsAdm() {
-    	return isAdm;
-    }
-    
-    public void setIsAdm(String isAdm) {
-        this.isAdm = isAdm;
-    }
 
     public String getCpf() {
-        return cpf;
+        return this.cpf;
     }
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
+    public String getIsAdm() {
+        return this.isAdm;
+    }
+
+    public void setIsAdm(String isAdm) {
+        this.isAdm = isAdm;
+    }
+
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
     public void setNome(String nome) {
@@ -90,7 +64,7 @@ public class Cliente{
     }
 
     public String getTelefone() {
-        return telefone;
+        return this.telefone;
     }
 
     public void setTelefone(String telefone) {
@@ -98,7 +72,7 @@ public class Cliente{
     }
 
     public String getSexo() {
-        return sexo;
+        return this.sexo;
     }
 
     public void setSexo(String sexo) {
@@ -106,11 +80,11 @@ public class Cliente{
     }
 
     public String getDataNasc() {
-        return dataNasc;
+        return this.dataNasc;
     }
 
     public void setDataNasc(String dataNasc) {
         this.dataNasc = dataNasc;
     }
-
+    
 }

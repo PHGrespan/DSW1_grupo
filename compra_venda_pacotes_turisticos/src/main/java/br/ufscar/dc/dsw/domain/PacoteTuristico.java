@@ -1,59 +1,63 @@
 package br.ufscar.dc.dsw.domain;
 
-import java.sql.Date;
 public class PacoteTuristico{
 
-	private Long id;
+    private String nome;
 	private AgenciaTurismo agencia;
-    private Date dataPartida;
-    private Date dataChegada;
+    private String dataPartida;
+    private Integer duracao;
     private Float valor;
     private String descricao;
-
+    private String destinos;
+    private String fotos;
     
-    public PacoteTuristico(Long id, AgenciaTurismo agencia, Date dataPartida, Date dataChegada, Float valor, String descricao) {
-        this.id = id;
+
+    public PacoteTuristico(String nome, AgenciaTurismo agencia, String dataPartida, Integer duracao, Float valor, String descricao, String destinos, String fotos) {
+        this.nome = nome;
         this.agencia = agencia;
         this.dataPartida = dataPartida;
-        this.dataChegada = dataChegada;
+        this.duracao = duracao;
         this.valor = valor;
         this.descricao = descricao;
+        this.destinos = destinos;
+        this.fotos = fotos;
     }
 
-    public Long getId() {
-        return id;
+
+    public String getNome() {
+        return this.nome;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public AgenciaTurismo getAgenciaTurismo() {
-        return agencia;
+    public AgenciaTurismo getAgencia() {
+        return this.agencia;
     }
 
-    public void setAgenciaTurismo(AgenciaTurismo agencia) {
+    public void setAgencia(AgenciaTurismo agencia) {
         this.agencia = agencia;
     }
 
-    public Date getDataPartida() {
-        return dataPartida;
+    public String getDataPartida() {
+        return this.dataPartida;
     }
 
-    public void setDataPartida(Date dataPartida) {
+    public void setDataPartida(String dataPartida) {
         this.dataPartida = dataPartida;
     }
 
-    public Date getDataChegada() {
-        return dataChegada;
+    public Integer getDuracao() {
+        return this.duracao;
     }
 
-    public void setDataChegada(Date dataChegada) {
-        this.dataChegada = dataChegada;
+    public void setDuracao(Integer duracao) {
+        this.duracao = duracao;
     }
 
     public Float getValor() {
-        return valor;
+        return this.valor;
     }
 
     public void setValor(Float valor) {
@@ -61,11 +65,27 @@ public class PacoteTuristico{
     }
 
     public String getDescricao() {
-        return descricao;
+        return this.descricao;
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getDestinos() {
+        return this.destinos;
+    }
+
+    public void setDestinos(String destinos) {
+        this.destinos = destinos;
+    }
+
+    public String getFotos() {
+        return this.fotos;
+    }
+
+    public void setFotos(String fotos) {
+        this.fotos = fotos;
     }
 
 }
