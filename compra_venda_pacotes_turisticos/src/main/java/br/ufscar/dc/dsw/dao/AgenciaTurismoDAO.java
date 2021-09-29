@@ -8,14 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufscar.dc.dsw.domain.AgenciaTurismo;
-import br.ufscar.dc.dsw.domain.User;
 
 
 public class AgenciaTurismoDAO extends GenericDAO {
 
     public void insert(AgenciaTurismo agencia) {
 
-        String sql = "INSERT INTO TB_AGENCIA_TURISMO(EMAIL, SENHA, IS_ADM, CNPJ, NOME, DESCRICAO) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO TB_AGENCIA_TURISMO (EMAIL, SENHA, CNPJ, NOME, DESCRICAO) VALUES(?, ?, ?, ?, ?)";
 
         try {
             Connection conn = this.getConnection();
@@ -23,10 +22,9 @@ public class AgenciaTurismoDAO extends GenericDAO {
 
      
             statement.setString(1, agencia.getEmail());
-            statement.setString(2, agencia.getSenha());
-            statement.setString(3, agencia.getIsAdm());            
-            statement.setString(4, agencia.getCnpj());
-            statement.setString(5, agencia.getDescricao());
+            statement.setString(2, agencia.getSenha());           
+            statement.setString(4, agencia.getCnpj()); 
+            statement.setString(5, agencia.getNome());
             statement.setString(6, agencia.getDescricao());
 
             statement.executeUpdate();
@@ -42,7 +40,7 @@ public class AgenciaTurismoDAO extends GenericDAO {
 
         List<AgenciaTurismo> listaAgencias = new ArrayList<>();
         AgenciaTurismo agencia = null;
-        String sql = "SELECT ID_AGENCIA_TURISMO, EMAIL, SENHA, IS_ADM, CNPJ, NOME, DESCRICAO FROM TB_AGENCIA_TURISMO";
+        String sql = "SELECT * FROM TB_AGENCIA_TURISMO";
 
         try {
         	Connection conn = this.getConnection();
@@ -65,13 +63,13 @@ public class AgenciaTurismoDAO extends GenericDAO {
     }
 
     public void delete(AgenciaTurismo agencia) {
-        String sql = "DELETE FROM TB_AGENCIA_TURISMO WHERE ID_AGENCIA_TURISMO=?";
+        String sql = "DELETE FROM TB_AGENCIA_TURISMO WHERE CNPJ=?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, agencia.getId());
+            statement.setString(1, agencia.getCnpj());
             statement.executeUpdate();
 
             statement.close();
@@ -82,19 +80,17 @@ public class AgenciaTurismoDAO extends GenericDAO {
     }
 
     public void update(AgenciaTurismo agencia) {
-        String sql = "UPDATE TB_AGENCIA_TURISMO SET EMAIL=?, SENHA=?, IS_ADM=?, CNPJ=?, NOME=?, DESCRICAO=? WHERE ID_AGENCIA_TURISMO=?";
+        String sql = "UPDATE TB_AGENCIA_TURISMO SET EMAIL=?, SENHA=?, NOME=?, DESCRICAO=? WHERE CNPJ=?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, agencia.getId());
-            statement.setString(2, agencia.getEmail());
-            statement.setString(3, agencia.getSenha());
-            statement.setString(4, agencia.getIsAdm()); 
+            statement.setString(1, agencia.getEmail());
+            statement.setString(2, agencia.getSenha());
+            statement.setString(3, agencia.getNome());
+            statement.setString(4, agencia.getDescricao());
             statement.setString(5, agencia.getCnpj());
-            statement.setString(6, agencia.getNome());
-            statement.setString(7, agencia.getDescricao());
             statement.executeUpdate();
 
             statement.close();
@@ -104,16 +100,16 @@ public class AgenciaTurismoDAO extends GenericDAO {
         }
     }
 
-    public AgenciaTurismo get(Long id) {
+    public AgenciaTurismo getByCnpj(String cnpj) {
 
-        String sql = "SELECT ID_AGENCIA_TURISMO, EMAIL, SENHA, IS_ADM, CNPJ, NOME, DESCRICAO FROM TB_AGENCIA_TURISMO WHERE ID_AGENCIA_TURISMO=?";
+        String sql = "SELECT * FROM TB_AGENCIA_TURISMO WHERE CNPJ=?";
         AgenciaTurismo agencia = null;
         
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setLong(1, id);
+            statement.setString(1, cnpj);
             ResultSet resultSet = statement.executeQuery();
             
             if (resultSet.next()) {
@@ -130,16 +126,16 @@ public class AgenciaTurismoDAO extends GenericDAO {
         }
     }
     
-    public AgenciaTurismo getLogin(String id) {
+    public AgenciaTurismo getByEmail(String email) {
 
-        String sql = "SELECT ID_AGENCIA_TURISMO, EMAIL, SENHA, IS_ADM, CNPJ, NOME, DESCRICAO FROM TB_AGENCIA_TURISMO WHERE EMAIL=?";
+        String sql = "SELECT * FROM TB_AGENCIA_TURISMO WHERE EMAIL=?";
         AgenciaTurismo agencia = null;
         
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, id);
+            statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             
             if (resultSet.next()) {
@@ -159,17 +155,13 @@ public class AgenciaTurismoDAO extends GenericDAO {
     private AgenciaTurismo getValues(ResultSet resultSet){
         try{
            
-            Long id = resultSet.getLong("ID_AGENCIA_TURISMO");
             String email = resultSet.getString("EMAIL");
-            String cnpj = resultSet.getString("CNPJ");
             String senha = resultSet.getString("SENHA");
-            String isAdm = resultSet.getString("IS_ADM");
+            String cnpj = resultSet.getString("CNPJ");
             String nome = resultSet.getString("NOME");
             String descricao = resultSet.getString("DESCRICAO");
             
-    
-            
-            return new AgenciaTurismo(id, email, senha, isAdm, cnpj, nome, descricao);
+            return new AgenciaTurismo(email, senha, cnpj, nome, descricao);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
