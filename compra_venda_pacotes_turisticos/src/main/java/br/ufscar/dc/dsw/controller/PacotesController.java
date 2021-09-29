@@ -6,10 +6,7 @@ import br.ufscar.dc.dsw.domain.PacoteTuristico;
 import br.ufscar.dc.dsw.util.Erro;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

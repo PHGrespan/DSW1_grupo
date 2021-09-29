@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.ufscar.dc.dsw.dao.AgenciaTurismoDAO;
 import br.ufscar.dc.dsw.dao.PacoteTuristicoDAO;
-import br.ufscar.dc.dsw.dao.UserDAO;
 import br.ufscar.dc.dsw.domain.PacoteTuristico;
-import br.ufscar.dc.dsw.domain.User;
 import br.ufscar.dc.dsw.domain.AgenciaTurismo;
 import br.ufscar.dc.dsw.util.Erro;
 
@@ -38,7 +36,7 @@ public class IndexAgenciaController extends HttpServlet {
 			}
 			if (!erros.isExisteErros()) {
 				AgenciaTurismoDAO dao = new AgenciaTurismoDAO();
-				AgenciaTurismo agencia = dao.getLogin(login);
+				AgenciaTurismo agencia = dao.getByEmail(login);
 				if (agencia != null) {
 					if (agencia.getSenha().equalsIgnoreCase(senha)) {
 						request.getSession().setAttribute("agenciaLogada", agencia);

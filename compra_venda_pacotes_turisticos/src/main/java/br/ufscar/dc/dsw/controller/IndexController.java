@@ -1,7 +1,6 @@
 package br.ufscar.dc.dsw.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,11 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ufscar.dc.dsw.dao.ClienteDAO;
-import br.ufscar.dc.dsw.dao.PacoteTuristicoDAO;
-import br.ufscar.dc.dsw.dao.UserDAO;
 import br.ufscar.dc.dsw.domain.Cliente;
-import br.ufscar.dc.dsw.domain.PacoteTuristico;
-import br.ufscar.dc.dsw.domain.User;
 import br.ufscar.dc.dsw.util.Erro;
 
 @WebServlet(name = "Index", urlPatterns = { "/log.jsp", "/logout.jsp" })
@@ -38,7 +33,7 @@ public class IndexController extends HttpServlet {
 			}
 			if (!erros.isExisteErros()) {
 				ClienteDAO dao = new ClienteDAO();
-				Cliente usuario = dao.getLogin(login);
+				Cliente usuario = dao.getByEmail(login);
 				if (usuario != null) {
 					if (usuario.getSenha().equalsIgnoreCase(senha)) {
 						request.getSession().setAttribute("usuarioLogado", usuario);

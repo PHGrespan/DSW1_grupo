@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ufscar.dc.dsw.dao.ClienteDAO;
-import br.ufscar.dc.dsw.dao.UserDAO;
 import br.ufscar.dc.dsw.domain.Cliente;
-import br.ufscar.dc.dsw.domain.User;
 import br.ufscar.dc.dsw.util.Erro;
 
 @WebServlet(urlPatterns = "/usuarios/*")
@@ -99,8 +97,8 @@ public class UserController extends HttpServlet {
 
 	private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Long id = Long.parseLong(request.getParameter("id"));
-		Cliente usuario = dao.get(id);
+		String cpf = request.getParameter("cpf");
+		Cliente usuario = dao.getByCpf(cpf);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/usuario/formulario.jsp");
 		request.setAttribute("usuario", usuario);
 		dispatcher.forward(request, response);
@@ -108,7 +106,6 @@ public class UserController extends HttpServlet {
 
 	private void insere(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
 		
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
@@ -129,7 +126,6 @@ public class UserController extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		Long id = Long.parseLong(request.getParameter("id"));
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
 		String cpf = request.getParameter("cpf");
@@ -137,19 +133,17 @@ public class UserController extends HttpServlet {
 		String nome = request.getParameter("nome");
 		String telefone = request.getParameter("telefone");
 		String sexo = request.getParameter("sexo");
-		String data = request.getParameter("data");
+		String dataNasc = request.getParameter("data");
 		
-		Cliente usuario = new Cliente(id, email, senha, cpf, isAdm, nome, telefone, sexo, data);
+		Cliente cliente = new Cliente(email, senha, cpf, isAdm, nome, telefone, sexo, dataNasc);
 
-		dao.update(usuario);
+		dao.update(cliente);
 		response.sendRedirect("lista");
 	}
 
 	private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Long id = Long.parseLong(request.getParameter("id"));
-
-		Cliente usuario = new Cliente(id);
-		dao.delete(usuario);
+		String cpf = request.getParameter("cpf");
+		dao.delete(dao.getByCpf(cpf));
 		response.sendRedirect("lista");
 	}
 }
