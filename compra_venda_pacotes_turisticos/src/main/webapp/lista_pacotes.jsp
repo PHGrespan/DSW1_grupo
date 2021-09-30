@@ -16,24 +16,32 @@
 		%>
 		<div align="center">
 			<h1>
-				<fmt:message key="user.welcome" />
+				<fmt:message key="pacote.principal" />
 			</h1>
-			<h3><fmt:message key="users.list" /></h3>
+			<h3><fmt:message key="pacote.list" /></h3>
 			<br/>
 		</div>
 		<div align="center">
 			<table border="1">
 				<tr>
-					<th><fmt:message key="user.login" /></th>
-					<th><fmt:message key="user.password" /></th>
-					<th><fmt:message key="user.isADM" /></th>
+					<th><fmt:message key="pacote.nome" /></th>
+					<th><fmt:message key="pacote.datapartida" /></th>
+					<th><fmt:message key="pacote.duracao" /></th>
+					<th><fmt:message key="pacote.valor" /></th>
+					<th><fmt:message key="pacote.descricao" /></th>
+					<th><fmt:message key="pacote.destinos" /></th>
+					<th><fmt:message key="pacote.fotos" /></th>
+					
 				</tr>
 				<c:forEach var="pacote" items="${requestScope.listaPacotes}">
 					<tr>
 						<td><c:out value="${pacote.nome}" /></td>
 						<td><c:out value="${pacote.dataPartida}" /></td>
-						<td><c:out value="${pacote.dataChegada}" /></td>
+						<td><c:out value="${pacote.duracao}" /></td>
 						<td><c:out value="${pacote.valor}" /></td>
+						<td><c:out value="${pacote.descricao}" /></td>
+						<td><c:out value="${pacote.destinos}" /></td>
+						<td><c:out value="${pacote.fotos}" /></td>
 					</tr>
 				</c:forEach>
 			</table>
