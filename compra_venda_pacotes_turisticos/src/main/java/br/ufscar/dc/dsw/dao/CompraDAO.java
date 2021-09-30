@@ -59,6 +59,34 @@ public class CompraDAO extends GenericDAO {
         }
         return listaCompras;
     }
+    
+    public List<Compra> getAllbyCPF(String cpf) {
+
+        List<Compra> listaCompras = new ArrayList<>();
+        Compra compra = null;
+        String sql = "SELECT * FROM TB_COMPRA WHERE CPF=?";
+
+        try {
+        	Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.setString(1, cpf);
+            ResultSet resultSet = statement.executeQuery(); 
+            
+            while (resultSet.next()) {
+                compra = getValues(resultSet);
+                listaCompras.add(compra);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaCompras;
+    }
 
     public void delete(Compra compra) {
         String sql = "DELETE FROM TB_COMPRA WHERE CPF=? AND NOME_PACOTE=?";

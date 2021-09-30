@@ -40,7 +40,7 @@ public class IndexController extends HttpServlet {
 						if (usuario.getIsAdm().equalsIgnoreCase("SIM")) {
 							response.sendRedirect("adm/");
 						} else {
-							response.sendRedirect("compras/");
+							response.sendRedirect("cliente/");
 						}
 						return;
 					} else {
