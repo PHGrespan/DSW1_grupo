@@ -14,7 +14,7 @@
         <%
 			String contextPath = request.getContextPath().replace("/", "");
 		%>
-        <h1><fmt:message key="page.label" /></h1>
+        <h1><fmt:message key="login.usuario" /></h1>
         <c:if test="${mensagens.existeErros}">
             <div id="erro">
                 <ul>
@@ -27,16 +27,16 @@
         <form method="post" action="log.jsp">
             <table>
                 <tr>
-                    <th><fmt:message key="user.login" />:</th>
+                    <th><fmt:message key="login" />:</th>
                     <td><input type="text" name="login" value="${param.login}"/></td>
                 </tr>
                 <tr>
-                    <th><fmt:message key="user.password" />:</th>
+                    <th><fmt:message key="senha" />:</th>
                     <td><input type="password" name="senha" /></td>
                 </tr>
                 <tr>
                     <td colspan="2"> 
-                        <input type="submit" name="bOK" value="<fmt:message key="user.login"/>">
+                        <input type="submit" name="bOK" value="<fmt:message key="confirmar"/>">
                     </td>
                 </tr>
             </table>

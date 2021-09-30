@@ -7,7 +7,7 @@
 <html>
 	<fmt:bundle basename="message">
 	<head>
-<title><fmt:message key="page.title" /></title>
+		<title><fmt:message key="page.title" /></title>
 	</head>
 
 	<body>

@@ -16,19 +16,19 @@
 		%>
         <p>
             <a href="/<%=contextPath%>/log.jsp"> 
-			    <fmt:message key="user.welcome" />
+			    <fmt:message key="login.cliente" />
             </a> 
         </p>
             <br>
                 <p>
                     <a href="/<%=contextPath%>/log_agencia.jsp"> 
-                        <fmt:message key="pacote.welcome" />
+                        <fmt:message key="login.agencia" />
                     </a>
                 </p>
             <br>
             <p>
                 <a href="/<%=contextPath%>/pacotes?action=lista"> 
-                    <fmt:message key="pacote.welcome" />
+                    <fmt:message key="lista.pacotes" />
                 </a>
             </p>
     </body>
