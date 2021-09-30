@@ -51,7 +51,7 @@
 						<td><c:out value="${agencia.nome}" /></td>
 						<td><c:out value="${agencia.descricao}" /></td>
 						<td><p>
-								<a href="/<%= contextPath %>/agencia/edicao?id=<c:out value='${agencia.id}' />">
+								<a href="/<%= contextPath %>/agencia/edicao?id=<c:out value='${agencia.cnpj}' />">
 									<fmt:message key="user.update" />
 								</a>
 							</p> 

@@ -12,7 +12,8 @@ VALUES
 
 INSERT INTO TB_PACOTE_TURISTICO(NOME, CNPJ, DATA_PARTIDA, DURACAO_DIAS, VALOR, DESCRICAO, DESTINOS, FOTOS) 
 VALUES 
-    ("Estados Unidos", '09756743254', '2021-2-01', 10, 1000.00,'Pacote de viagem para os Estados Unidos, 10 dias de viagem, vamos às compras', 'California, Florida', 'url.foto1, url.foto2');
+    ("Estados Unidos", '09756743254', '2021-2-01', 10, 1000.00,'Pacote de viagem para os Estados Unidos, 10 dias de viagem, vamos às compras', 'California, Florida', 'url.foto1, url.foto2'),
+    ("Canadá", '11234512331', '2026-10-20', 7, 500.00,'Pacote de viagem para o Canadáo, 7 dias de viagem, vamos às compras', 'Toronto', 'url.foto1, url.foto2');
 
 INSERT INTO TB_COMPRA(CPF, NOME_PACOTE) 
 VALUES 
