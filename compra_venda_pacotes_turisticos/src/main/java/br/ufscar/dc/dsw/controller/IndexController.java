@@ -37,8 +37,8 @@ public class IndexController extends HttpServlet {
 				if (usuario != null) {
 					if (usuario.getSenha().equalsIgnoreCase(senha)) {
 						request.getSession().setAttribute("usuarioLogado", usuario);
-						if (usuario.getIsAdm().equalsIgnoreCase("ADM")) {
-							response.sendRedirect("usuarios/");
+						if (usuario.getIsAdm().equalsIgnoreCase("SIM")) {
+							response.sendRedirect("adm/");
 						} else {
 							response.sendRedirect("compras/");
 						}

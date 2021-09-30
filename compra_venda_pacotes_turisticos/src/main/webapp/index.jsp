@@ -19,18 +19,18 @@
 			    <fmt:message key="login.cliente" />
             </a> 
         </p>
-            <br>
-                <p>
-                    <a href="/<%=contextPath%>/log_agencia.jsp"> 
-                        <fmt:message key="login.agencia" />
-                    </a>
-                </p>
-            <br>
-            <p>
-                <a href="/<%=contextPath%>/pacotes?action=lista"> 
-                    <fmt:message key="lista.pacotes" />
-                </a>
-            </p>
+        <br>
+        <p>
+            <a href="/<%=contextPath%>/log_agencia.jsp"> 
+                <fmt:message key="login.agencia" />
+            </a>
+        </p>
+        <br>
+        <p>
+            <a href="/<%=contextPath%>/pacotes?action=lista"> 
+                <fmt:message key="lista.pacotes" />
+            </a>
+        </p>
     </body>
 </fmt:bundle>
 </html>

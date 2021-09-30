@@ -23,9 +23,9 @@ public class AgenciaTurismoDAO extends GenericDAO {
      
             statement.setString(1, agencia.getEmail());
             statement.setString(2, agencia.getSenha());           
-            statement.setString(4, agencia.getCnpj()); 
-            statement.setString(5, agencia.getNome());
-            statement.setString(6, agencia.getDescricao());
+            statement.setString(3, agencia.getCnpj()); 
+            statement.setString(4, agencia.getNome());
+            statement.setString(5, agencia.getDescricao());
 
             statement.executeUpdate();
 

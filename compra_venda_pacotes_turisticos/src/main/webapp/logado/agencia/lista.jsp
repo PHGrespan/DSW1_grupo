@@ -16,7 +16,7 @@
 		%>
 		<div align="center">
 			<h1>
-				<fmt:message key="user.welcome" />
+				<fmt:message key="adm.title" />
 			</h1>
 			<h2>
 				&nbsp;&nbsp;&nbsp;
@@ -39,7 +39,7 @@
 					<th><fmt:message key="agencia.senha" /></th>
 					<th><fmt:message key="agencia.cnpj" /></th>
 					<th><fmt:message key="agencia.nome" /></th>
-					<th><fmt:message key="agencia.desc" /></th>
+					<th><fmt:message key="agencia.descricao" /></th>
 					<th><fmt:message key="user.update" /></th>
 					<th><fmt:message key="user.delete" /></th>
 				</tr>
@@ -51,16 +51,16 @@
 						<td><c:out value="${agencia.nome}" /></td>
 						<td><c:out value="${agencia.descricao}" /></td>
 						<td><p>
-								<a href="/<%= contextPath %>/agencia/edicao?id=<c:out value='${agencia.cnpj}' />">
-									<fmt:message key="user.update" />
+								<a href="/<%= contextPath %>/agencia/edicao?cnpj=<c:out value='${agencia.cnpj}' />">
+									<fmt:message key="global.update" />
 								</a>
 							</p> 
 						</td>
 						
 						<td>
                             <p>
-                                <a href="/<%= contextPath %>/usuarios/remocao?id=<c:out value='${usuario.id}' />">
-									<fmt:message key="user.delete" />
+                                <a href="/<%= contextPath %>/usuarios/remocao?cnpj=<c:out value='${usuario.cnpj}' />">
+									<fmt:message key="global.delete" />
 								</a>
 							</p>
 						</td>
