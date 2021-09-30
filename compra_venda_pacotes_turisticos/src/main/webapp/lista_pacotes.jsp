@@ -31,6 +31,7 @@
 					<th><fmt:message key="pacote.descricao" /></th>
 					<th><fmt:message key="pacote.destinos" /></th>
 					<th><fmt:message key="pacote.fotos" /></th>
+					<th><fmt:message key="user.compra" /></th>
 					
 				</tr>
 				<c:forEach var="pacote" items="${requestScope.listaPacotes}">
@@ -42,6 +43,12 @@
 						<td><c:out value="${pacote.descricao}" /></td>
 						<td><c:out value="${pacote.destinos}" /></td>
 						<td><c:out value="${pacote.fotos}" /></td>
+						<td><p><a
+							href="/<%= contextPath %>/cliente/compra?nome=<c:out value='${pacote.nome}' />">
+								<fmt:message key="user.compra" />
+								</a>
+							</p> 
+						</td>
 					</tr>
 				</c:forEach>
 			</table>

@@ -62,15 +62,18 @@ public class ClienteController extends HttpServlet {
                 // case "/cadastro":
                 //     apresentaFormCadastro(request, response);
                 //     break;
-                case "/insercao":
-                	inserePacote(request, response);
+                case "/compra":
+                	compraPacote(request, response);
                     break;
-                case "/remocao":
-                    remove(request, response);
-                    break;
+                //case "/remocao":
+                //    removePacote(request, response);
+                //    break;
                 // case "/edicao":
                 //     apresentaFormEdicao(request, response);
                 //     break;
+                case "/edicao":
+                	apresentaFormEdicaoUser(request, response);
+                	break;
                 case "/atualizacao":
                     atualize(request, response);
                     break;
@@ -84,12 +87,21 @@ public class ClienteController extends HttpServlet {
     }
 
     private void listaPacotes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Cliente cliente = (Cliente) request.getSession().getAttribute("usuarioLogado");
+        Cliente cliente = (Cliente) request.getSession().getAttribute("usuarioLogado");        
     	List<Compra> listaPacotes = dao_compra.getAllbyCPF(cliente.getCpf());
         request.setAttribute("listaPacotes", listaPacotes);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/cliente/lista.jsp");
         dispatcher.forward(request, response);
     }
+    
+    private void apresentaFormEdicaoUser(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String cpf = request.getParameter("cpf");
+		Cliente usuario = dao.getByCpf(cpf);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/cliente/formulario.jsp");
+		request.setAttribute("usuario", usuario);
+		dispatcher.forward(request, response);
+	}
 
     // private Map<Long, String> getUsers() {
     //     Map<Long, String> usuarios = new HashMap<>();
@@ -116,21 +128,25 @@ public class ClienteController extends HttpServlet {
     //     dispatcher.forward(request, response);
     // }
 
-    private void inserePacote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void compraPacote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
-        String cpf = request.getParameter("cpf");
-        String isAdm = request.getParameter("isAdm");
-        String nome = request.getParameter("nome");
-        String tel = request.getParameter("telefone");
-        String sexo = request.getParameter("sexo");
-        String dataNasc = request.getParameter("dataNasc");
+        Cliente cliente = (Cliente) request.getSession().getAttribute("usuarioLogado");
+        /*String email = cliente.getEmail();
+        String senha = cliente.getSenha();
+        String cpf = cliente.getCpf();
+        String isAdm = cliente.getIsAdm();
+        String nome = cliente.getNome();
+        String tel = cliente.getTelefone();
+        String sexo = cliente.getSexo();
+        String dataNasc = cliente.getDataNasc();*/
         
+        String nome = request.getParameter("nome");
+        
+        PacoteTuristico pacote = dao_pacotes.getByNome(nome);
 
-        //PacoteTuristico agencia = new PacoteTuristico(email, senha, cnpj, nome, descricao);
-        //dao.insert(agencia);
+        Compra compra = new Compra(cliente, pacote);
+        dao_compra.insert(compra);
         response.sendRedirect("lista");
     }
 
@@ -150,13 +166,6 @@ public class ClienteController extends HttpServlet {
         
         Cliente cliente = new Cliente(email, senha, cpf, isAdm, nome, tel, sexo, dataNasc);
         dao.update(cliente);
-        response.sendRedirect("lista");
-    }
-
-    private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //String cpf = request.getParameter("cnpj");
-
-        //dao_pacotes.delete(dao_pacotes.getByCpf(cnpj));
         response.sendRedirect("lista");
     }
 }

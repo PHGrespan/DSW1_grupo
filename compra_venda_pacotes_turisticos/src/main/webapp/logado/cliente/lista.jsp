@@ -24,7 +24,7 @@
 			<br/>
 			<br/>
 			<h2>
-				<a href="/<%=contextPath%>/adm/usuario/cadastro"> 
+				<a href="/<%=contextPath%>/pacotes/"> 
 					<fmt:message key="user.compra" />
 				</a> 
 				<h3><fmt:message key="user.listaPacotes" /></h3>
@@ -41,14 +41,14 @@
 					<th><fmt:message key="pacote.fotos" /></th>
 				</tr>
 				<c:forEach var="compra" items="${requestScope.listaPacotes}">
-					<<tr>
+					<tr>
 						<td><c:out value="${compra.cliente.cpf}" /></td>
 						<td><c:out value="${compra.pacote.nome}" /></td>
 						<td><c:out value="${compra.pacote.dataPartida}" /></td>
 						<td><c:out value="${compra.pacote.duracao}" /></td>
 						<td><c:out value="${compra.pacote.valor}" /></td>
 						<td><c:out value="${compra.pacote.descricao}" /></td>
-						<td><c:out value="$compra.{pacote.destinos}" /></td>
+						<td><c:out value="${compra.pacote.destinos}" /></td>
 						<td><c:out value="${compra.pacote.fotos}" /></td>
 					</tr>
 				</c:forEach>

@@ -2,6 +2,7 @@ package br.ufscar.dc.dsw.controller;
 
 
 import br.ufscar.dc.dsw.dao.PacoteTuristicoDAO;
+import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.PacoteTuristico;
 import br.ufscar.dc.dsw.util.Erro;
 
@@ -33,7 +34,7 @@ public class PacotesController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    	request.getSession();
     	Erro erros = new Erro();
 		
         String action = request.getPathInfo();
@@ -43,7 +44,7 @@ public class PacotesController extends HttpServlet {
 
         try {
             switch (action) {
-                default:
+            	 default:
                     lista(request, response);
                     break;
                 

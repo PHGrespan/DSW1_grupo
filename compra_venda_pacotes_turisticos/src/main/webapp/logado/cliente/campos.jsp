@@ -22,21 +22,8 @@
 		<td><input type="text" name="email" size="45" required value="<c:out value='${usuario.email}' />" /></td>
 	</tr>
 	<tr>
-		<td><label for="senha"><fmt:message key="user.password" /></label></td>
-		<td><input type="text" name="senha" size="20" required value="<c:out value='${usuario.senha}' />" /></td>
-	</tr>
-	<tr>
 		<td><label for="cpf"><fmt:message key="user.cpf" /></label></td>
 		<td><input type="text" name="cpf" size="45" required value="<c:out value='${usuario.cpf}' />" /></td>
-	</tr>
-	<tr>
-		<td><label for="isAdm"><fmt:message key="user.isAdm" /></label></td>
-		<td>
-			<select name="isAdm">
-				<option value="NAO" ${usuario.isAdm == NAO ? 'selected="selected"' : ''}>NAO</option>
-				<option value="SIM" ${usuario.isAdm == SIM ? 'selected="selected"' : ''}>SIM</option>
-			</select>			
-		</td>
 	</tr>
 	<tr>
 		<td><label for="nome"><fmt:message key="user.nome" /></label></td>

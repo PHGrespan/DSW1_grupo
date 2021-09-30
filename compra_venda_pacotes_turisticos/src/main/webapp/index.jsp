@@ -27,7 +27,7 @@
         </p>
         <br>
         <p>
-            <a href="/<%=contextPath%>/pacotes?action=lista"> 
+            <a href="/<%=contextPath%>/pacotes"> 
                 <fmt:message key="lista.pacotes" />
             </a>
         </p>
