@@ -77,7 +77,7 @@ public class AdmController extends HttpServlet {
 			case "/usuario/atualizacao":
 				atualizeUser(request, response);
 				break;
-				case "/agencia/cadastro":
+			case "/agencia/cadastro":
 				apresentaFormCadastroAgencia(request, response);
 				break;
 			case "/agencia/insercao":
@@ -160,7 +160,7 @@ public class AdmController extends HttpServlet {
 		String nome = request.getParameter("nome");
 		String telefone = request.getParameter("telefone");
 		String sexo = request.getParameter("sexo");
-		String dataNasc = request.getParameter("data");
+		String dataNasc = request.getParameter("dataNasc");
 		
 		Cliente cliente = new Cliente(email, senha, cpf, isAdm, nome, telefone, sexo, dataNasc);
 

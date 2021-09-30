@@ -39,8 +39,6 @@
 					<th><fmt:message key="user.telefone" /></th>
 					<th><fmt:message key="user.sexo" /></th>
 					<th><fmt:message key="user.dataNasc" /></th>
-					<th><fmt:message key="user.update" /></th>
-					<th><fmt:message key="user.delete" /></th>
 				</tr>
 				<c:forEach var="usuario" items="${requestScope.listaUsuarios}">
 					<tr>
@@ -97,7 +95,7 @@
 							</td>
 							<td>
 								<p>
-									<a href="/<%= contextPath %>/adm/agencia/remocao?cpcnpjf=<c:out value='${agencia.cnpj}' />">
+									<a href="/<%= contextPath %>/adm/agencia/remocao?cnpj=<c:out value='${agencia.cnpj}' />">
 										<fmt:message key="global.delete" />
 									</a>
 								</p>

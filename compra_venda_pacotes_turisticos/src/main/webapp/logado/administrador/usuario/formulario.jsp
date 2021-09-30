@@ -16,7 +16,7 @@
 		%>
 		<div align="center">
 			<h1>
-				<fmt:message key="user.welcome" />
+				<fmt:message key="global.user" />
 			</h1>
 			<h2>
 				<a href="lista"> 

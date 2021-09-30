@@ -16,17 +16,17 @@
 		%>
 		<div align="center">
 			<h1>
-				<fmt:message key="users.welcome" />
+				<fmt:message key="global.agencia" />
 			</h1>
 			<h2>
 				<a href="lista"> 
-					<fmt:message key="users.list" />
+					<fmt:message key="agencia.list" />
 				</a>
 			</h2>
 		</div>
 		<div align="center">
 			<c:choose>
-				<c:when test="${usuario != null}">
+				<c:when test="${agencia != null}">
 					<form action="atualizacao" method="post">
 						<%@include file="campos.jsp"%>
 					</form>
