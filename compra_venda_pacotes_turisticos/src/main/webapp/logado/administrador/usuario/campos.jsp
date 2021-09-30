@@ -26,6 +26,10 @@
 		<td><input type="text" name="senha" size="20" required value="<c:out value='${usuario.senha}' />" /></td>
 	</tr>
 	<tr>
+		<td><label for="cpf"><fmt:message key="user.cpf" /></label></td>
+		<td><input type="text" name="cpf" size="45" required value="<c:out value='${usuario.cpf}' />" /></td>
+	</tr>
+	<tr>
 		<td><label for="isAdm"><fmt:message key="user.isAdm" /></label></td>
 		<td>
 			<select name="isAdm">

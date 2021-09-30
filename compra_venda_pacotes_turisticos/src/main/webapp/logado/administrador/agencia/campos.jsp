@@ -26,6 +26,10 @@
 		<td><input type="text" name="senha" size="20" required value="<c:out value='${agencia.senha}' />" /></td>
 	</tr>
 	<tr>
+		<td><label for="cnpj"><fmt:message key="agencia.cnpj" /></label></td>
+		<td><input type="text" name="cnpj" size="20" required value="<c:out value='${agencia.cnpj}' />" /></td>
+	</tr>
+	<tr>
 		<td><label for="nome"><fmt:message key="agencia.nome" /></label></td>
 		<td><input type="text" name="nome" size="20" required value="<c:out value='${agencia.nome}' />" /></td>
 	</tr>
