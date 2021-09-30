@@ -18,26 +18,19 @@
 		<input type="hidden" name="id" value="<c:out value='${usuario.id}' />" />
 	</c:if>
 	<tr>
-		<td><label for="email"><fmt:message key="user.email" />
-		</label></td>
-		<td><input type="text" name="email" size="45" required
-			value="<c:out value='${usuario.email}' />" /></td>
+		<td><label for="email"><fmt:message key="user.email" /></label></td>
+		<td><input type="text" name="email" size="45" required value="<c:out value='${usuario.email}' />" /></td>
 	</tr>
 	<tr>
-		<td><label for="senha"><fmt:message key="user.password" />
-		</label></td>
-		<td><input type="text" name="senha" size="20" required
-			value="<c:out value='${usuario.senha}' />" /></td>
+		<td><label for="senha"><fmt:message key="user.password" /></label></td>
+		<td><input type="text" name="senha" size="20" required value="<c:out value='${usuario.senha}' />" /></td>
 	</tr>
 	<tr>
-		<td><label for="cpf"><fmt:message key="user.cpf" />
-		</label></td>
-		<td><input type="text" name="cpf" size="20" required
-			value="<c:out value='${usuario.cpf}' />" /></td>
+		<td><label for="cpf"><fmt:message key="user.cpf" /></label></td>
+		<td><input type="text" name="cpf" size="20" required value="<c:out value='${usuario.cpf}' />" /></td>
 	</tr>
 	<tr>
-		<td><label for="isAdm"><fmt:message key="user.isAdm" />
-		</label></td>
+		<td><label for="isAdm"><fmt:message key="user.isAdm" /></label></td>
 		<td>
 			<select name="isAdm">
 				<option value="ADM" ${usuario.isAdm == ADM ? 'selected="selected"' : ''}>ADM</option>
@@ -47,31 +40,22 @@
 		</td>
 	</tr>
 	<tr>
-		<td><label for="nome"><fmt:message key="cliente.nome" />
-		</label></td>
-		<td><input type="text" name="nome" size="20" required
-			value="<c:out value='${usuario.nome}' />" /></td>
+		<td><label for="nome"><fmt:message key="cliente.nome" /></label></td>
+		<td><input type="text" name="nome" size="20" required value="<c:out value='${usuario.nome}' />" /></td>
 	</tr>
 	<tr>
-		<td><label for="telefone"><fmt:message key="cliente.tel" />
-		</label></td>
-		<td><input type="text" name="telefone" size="20" required
-			value="<c:out value='${usuario.telefone}' />" /></td>
+		<td><label for="telefone"><fmt:message key="cliente.tel" /></label></td>
+		<td><input type="text" name="telefone" size="20" required value="<c:out value='${usuario.telefone}' />" /></td>
 	</tr>
 	<tr>
-		<td><label for="sexo"><fmt:message key="cliente.genero" />
-		</label></td>
-		<td><input type="text" name="sexo" size="20" required
-			value="<c:out value='${usuario.sexo}' />" /></td>
+		<td><label for="sexo"><fmt:message key="cliente.genero" /></label></td>
+		<td><input type="text" name="sexo" size="20" required value="<c:out value='${usuario.sexo}' />" /></td>
 	</tr>
 	<tr>
-		<td><label for="dataNasc"><fmt:message key="cliente.nasc" />
-		</label></td>
-		<td><input type="text" name="dataNasc" size="20" required
-			value="<c:out value='${usuario.dataNasc}' />" /></td>
+		<td><label for="dataNasc"><fmt:message key="cliente.nasc" /></label></td>
+		<td><input type="text" name="dataNasc" size="20" required value="<c:out value='${usuario.dataNasc}' />" /></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="center"><input type="submit"
-			value="<fmt:message key="save.link" />" /></td>
+		<td colspan="2" align="center"><input type="submit" value="<fmt:message key="save.link" />" /></td>
 	</tr>
 </table>

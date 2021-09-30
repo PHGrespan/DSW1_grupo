@@ -20,7 +20,7 @@
                 <ul>
                     <c:forEach var="erro" items="${mensagens.erros}">
                         <li> ${erro} </li>
-                        </c:forEach>
+                    </c:forEach>
                 </ul>
             </div>
         </c:if>

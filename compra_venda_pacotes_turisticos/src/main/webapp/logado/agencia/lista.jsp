@@ -19,7 +19,6 @@
 				<fmt:message key="user.welcome" />
 			</h1>
 			<h2>
-
 				&nbsp;&nbsp;&nbsp;
 				<a href="${pageContext.request.contextPath}/logout.jsp">
 					<fmt:message key="exit.link" />
@@ -32,15 +31,12 @@
 			</h2>
 			<h3><fmt:message key="user.list" /></h3>
 			<br/>
-			
 		</div>
 		<div align="center">
 			<table border="1">
 				<tr>
-					<th><fmt:message key="agencia.id" /></th>
 					<th><fmt:message key="agencia.email" /></th>
 					<th><fmt:message key="agencia.senha" /></th>
-					<th><fmt:message key="agencia.isAdm" /></th>
 					<th><fmt:message key="agencia.cnpj" /></th>
 					<th><fmt:message key="agencia.nome" /></th>
 					<th><fmt:message key="agencia.desc" /></th>
@@ -49,24 +45,21 @@
 				</tr>
 				<c:forEach var="agencia" items="${requestScope.listaAgencia}">
 					<tr>
-						<td><c:out value="${agencia.id}" /></td>
 						<td><c:out value="${agencia.email}" /></td>
 						<td><c:out value="${agencia.senha}" /></td>
-						<td><c:out value="${agencia.isAdm}" /></td>
 						<td><c:out value="${agencia.cnpj}" /></td>
 						<td><c:out value="${agencia.nome}" /></td>
 						<td><c:out value="${agencia.descricao}" /></td>
-						<td><p><a
-							href="/<%= contextPath %>/agencia/edicao?id=<c:out value='${agencia.id}' />">
-								<fmt:message key="user.update" />
+						<td><p>
+								<a href="/<%= contextPath %>/agencia/edicao?id=<c:out value='${agencia.id}' />">
+									<fmt:message key="user.update" />
 								</a>
 							</p> 
 						</td>
 						
 						<td>
                             <p>
-                                <a
-									href="/<%= contextPath %>/usuarios/remocao?id=<c:out value='${usuario.id}' />">
+                                <a href="/<%= contextPath %>/usuarios/remocao?id=<c:out value='${usuario.id}' />">
 									<fmt:message key="user.delete" />
 								</a>
 							</p>

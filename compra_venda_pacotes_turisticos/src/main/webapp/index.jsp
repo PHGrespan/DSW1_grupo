@@ -15,22 +15,22 @@
 			String contextPath = request.getContextPath().replace("/", "");
 		%>
         <p>
-                     <a href="/<%=contextPath%>/log.jsp"> 
-			    	<fmt:message key="user.welcome" />
-                </a> 
-            </p>
-                <br>
+            <a href="/<%=contextPath%>/log.jsp"> 
+			    <fmt:message key="user.welcome" />
+            </a> 
+        </p>
+            <br>
                 <p>
-				<a href="/<%=contextPath%>/log_agencia.jsp"> 
-			    	<fmt:message key="pacote.welcome" />
-				</a>
+                    <a href="/<%=contextPath%>/log_agencia.jsp"> 
+                        <fmt:message key="pacote.welcome" />
+                    </a>
                 </p>
-                <br>
-                <p>
-				<a href="/<%=contextPath%>/pacotes?action=lista"> 
-			    	<fmt:message key="pacote.welcome" />
+            <br>
+            <p>
+                <a href="/<%=contextPath%>/pacotes?action=lista"> 
+                    <fmt:message key="pacote.welcome" />
                 </a>
-                </p>
+            </p>
     </body>
 </fmt:bundle>
 </html>

@@ -24,14 +24,13 @@
 		<div align="center">
 			<table border="1">
 				<tr>
-					<th><fmt:message key="user.id" /></th>
 					<th><fmt:message key="user.login" /></th>
 					<th><fmt:message key="user.password" /></th>
 					<th><fmt:message key="user.isADM" /></th>
 				</tr>
 				<c:forEach var="pacote" items="${requestScope.listaPacotes}">
 					<tr>
-						<td><c:out value="${pacote.id}" /></td>
+						<td><c:out value="${pacote.nome}" /></td>
 						<td><c:out value="${pacote.dataPartida}" /></td>
 						<td><c:out value="${pacote.dataChegada}" /></td>
 						<td><c:out value="${pacote.valor}" /></td>
