@@ -56,18 +56,9 @@ public class ClienteController extends HttpServlet {
 
         try {
             switch (action) {
-                // case "/cadastro":
-                //     apresentaFormCadastro(request, response);
-                //     break;
                 case "/compra":
                 	compraPacote(request, response);
                     break;
-                //case "/remocao":
-                //    removePacote(request, response);
-                //    break;
-                // case "/edicao":
-                //     apresentaFormEdicao(request, response);
-                //     break;
                 case "/edicao":
                 	apresentaFormEdicaoUser(request, response);
                 	break;
@@ -99,31 +90,6 @@ public class ClienteController extends HttpServlet {
 		request.setAttribute("usuario", usuario);
 		dispatcher.forward(request, response);
 	}
-
-    // private Map<Long, String> getUsers() {
-    //     Map<Long, String> usuarios = new HashMap<>();
-    //     for (User usuario : new UserDAO().getAll()) {
-    //         usuarios.put(usuario.getId(), usuario.getEmail());
-    //     }
-    //     return usuarios;
-    // }
-
-    // private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
-    //         throws ServletException, IOException {
-    //     request.setAttribute("usuarios", getUsers());
-    //     RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/formulario.jsp");
-    //     dispatcher.forward(request, response);
-    // }
-
-    // private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
-    //         throws ServletException, IOException {
-    //     String cnpj = request.getParameter("cnpj");
-    //     AgenciaTurismo agencia = dao.getByCnpj(cnpj);
-    //     request.setAttribute("agencia", agencia);
-    //     request.setAttribute("usuarios", getUsers());
-    //     RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/formulario.jsp");
-    //     dispatcher.forward(request, response);
-    // }
 
     private void compraPacote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");

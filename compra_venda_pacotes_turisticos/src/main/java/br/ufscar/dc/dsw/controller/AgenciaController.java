@@ -1,16 +1,11 @@
 package br.ufscar.dc.dsw.controller;
 
-
-import br.ufscar.dc.dsw.dao.AgenciaTurismoDAO;
 import br.ufscar.dc.dsw.dao.PacoteTuristicoDAO;
 import br.ufscar.dc.dsw.domain.AgenciaTurismo;
-import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.PacoteTuristico;
-import java.util.Date;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,13 +19,11 @@ public class AgenciaController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private AgenciaTurismoDAO dao;
     private PacoteTuristicoDAO dao_pacotes;
     
 
     @Override
     public void init() {
-        dao = new AgenciaTurismoDAO();
         dao_pacotes = new PacoteTuristicoDAO();
     }
 
@@ -92,27 +85,19 @@ public class AgenciaController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    // private Map<Long, String> getUsers() {
-    //     Map<Long, String> usuarios = new HashMap<>();
-    //     for (User usuario : new UserDAO().getAll()) {
-    //         usuarios.put(usuario.getId(), usuario.getEmail());
-    //     }
-    //     return usuarios;
-    // }
-
-     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
-             throws ServletException, IOException {
-         RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/formulario.jsp");
-         dispatcher.forward(request, response);
-     }
+    private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/formulario.jsp");
+        dispatcher.forward(request, response);
+    }
 
     private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
              throws ServletException, IOException {
-         String nome = request.getParameter("nome");
-         PacoteTuristico pacote = dao_pacotes.getByNome(nome);
-         request.setAttribute("pacote", pacote);
-         RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/formulario.jsp");
-         dispatcher.forward(request, response);
+        String nome = request.getParameter("nome");
+        PacoteTuristico pacote = dao_pacotes.getByNome(nome);
+        request.setAttribute("pacote", pacote);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/formulario.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void inserePacote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
