@@ -66,15 +66,17 @@ public class PacoteTuristicoDAO extends GenericDAO {
         return listaPacotes;
     }
     
-    public List<PacoteTuristico> getAllCurrent() throws ParseException {
+    public List<PacoteTuristico> getAllCurrent(String cnpj) throws ParseException {
 
         List<PacoteTuristico> listaPacotes = new ArrayList<>();
         PacoteTuristico pacote = null;
-        String sql = "SELECT * FROM TB_PACOTE_TURISTICO";
+        String sql = "SELECT * FROM TB_PACOTE_TURISTICO WHERE CNPJ=?";
 
         try {
         	Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.setString(1, cnpj);
             ResultSet resultSet = statement.executeQuery(); 
             Date dataAtual = new Date();
 
