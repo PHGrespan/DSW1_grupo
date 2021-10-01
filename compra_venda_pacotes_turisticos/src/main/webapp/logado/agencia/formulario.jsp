@@ -16,11 +16,11 @@
 		%>
 		<div align="center">
 			<h1>
-				<fmt:message key="global.user" />
+				<fmt:message key="global.agencia" />
 			</h1>
 			<h2>
 				<a href="lista"> 
-					<fmt:message key="user.list" />
+					<fmt:message key="agencia.list" />
 				</a>
 			</h2>
 		</div>
