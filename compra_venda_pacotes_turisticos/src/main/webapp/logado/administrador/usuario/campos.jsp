@@ -50,9 +50,9 @@
 		<td><label for="sexo"><fmt:message key="user.sexo" /></label></td>
 		<td>
 			<select name="sexo">
-				<option value="Feminino" ${usuario.isAdm == Feminino ? 'selected="selected"' : ''}>Feminino</option>
-				<option value="Masculino" ${usuario.isAdm == Masculino ? 'selected="selected"' : ''}>Masculino</option>
-				<option value="Outro" ${usuario.isAdm == Outro ? 'selected="selected"' : ''}>Outro</option>
+				<option value="Feminino" ${usuario.sexo == Feminino ? 'selected="selected"' : ''}>Feminino</option>
+				<option value="Masculino" ${usuario.sexo == Masculino ? 'selected="selected"' : ''}>Masculino</option>
+				<option value="Outro" ${usuario.sexo == Outro ? 'selected="selected"' : ''}>Outro</option>
 			</select>	
 		</td>
 	</tr>
