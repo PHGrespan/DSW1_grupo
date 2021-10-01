@@ -146,8 +146,9 @@ public class AgenciaController extends HttpServlet {
     private void listaFiltrada(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 		List<PacoteTuristico> listaPacotes = null;
+		AgenciaTurismo agencia = (AgenciaTurismo) request.getSession().getAttribute("agenciaLogada");
 		try {
-			listaPacotes = dao_pacotes.getAllCurrent();
+			listaPacotes = dao_pacotes.getAllCurrent(agencia.getCnpj());
 			request.setAttribute("listaPacotes", listaPacotes);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/lista.jsp");
 	        dispatcher.forward(request, response);
