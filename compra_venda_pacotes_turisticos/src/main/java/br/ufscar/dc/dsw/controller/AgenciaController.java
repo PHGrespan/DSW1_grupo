@@ -6,8 +6,11 @@ import br.ufscar.dc.dsw.dao.PacoteTuristicoDAO;
 import br.ufscar.dc.dsw.domain.AgenciaTurismo;
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.PacoteTuristico;
+import java.util.Date;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -67,6 +70,9 @@ public class AgenciaController extends HttpServlet {
                      break;
                 case "/atualizacao":
                     atualizePacote(request, response);
+                    break;
+                case "/filtrarPacotes":
+                	listaFiltrada(request, response);
                     break;
                 default:
                     lista(request, response);
@@ -151,4 +157,18 @@ public class AgenciaController extends HttpServlet {
         dao_pacotes.delete(dao_pacotes.getByNome(nome));
         response.sendRedirect("lista");
     }
+    
+    private void listaFiltrada(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+		List<PacoteTuristico> listaPacotes = null;
+		try {
+			listaPacotes = dao_pacotes.getAllCurrent();
+			request.setAttribute("listaPacotes", listaPacotes);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/lista.jsp");
+	        dispatcher.forward(request, response);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+        
+	}
 }

@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.ufscar.dc.dsw.domain.PacoteTuristico;
@@ -51,6 +54,39 @@ public class PacoteTuristicoDAO extends GenericDAO {
             while (resultSet.next()) {
                 pacote = getValues(resultSet);
                 listaPacotes.add(pacote);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaPacotes;
+    }
+    
+    public List<PacoteTuristico> getAllCurrent() throws ParseException {
+
+        List<PacoteTuristico> listaPacotes = new ArrayList<>();
+        PacoteTuristico pacote = null;
+        String sql = "SELECT * FROM TB_PACOTE_TURISTICO";
+
+        try {
+        	Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery(); 
+            Date dataAtual = new Date();
+
+            
+            while (resultSet.next()) {
+                pacote = getValues(resultSet);
+                
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
+                Date data = formato.parse(pacote.getDataPartida());
+                if(dataAtual.before(data)) {
+                	listaPacotes.add(pacote);
+                }
             }
 
             resultSet.close();

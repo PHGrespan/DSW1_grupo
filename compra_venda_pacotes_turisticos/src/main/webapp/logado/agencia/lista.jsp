@@ -28,7 +28,22 @@
 					<fmt:message key="agencia.criar_pacotes" />
 				</a> 
 				<h3><fmt:message key="agencia.listaPacotes" /></h3>
-			<br/>
+			</br>
+			<form method="post" action="${pageContext.request.contextPath}/agencia/lista">
+				<table>
+				<td colspan="2"> 
+						<input type="submit" name="bOK" value="<fmt:message key="agencia.todos" />">
+					</td>
+				</table>
+			</form>
+			<form method="post" action="${pageContext.request.contextPath}/agencia/filtrarPacotes">
+				<table>
+				<td colspan="2"> 
+						<input type="submit" name="bOK" value="<fmt:message key="agencia.vigentes" />">
+					</td>
+				</table>
+			</form>
+			<br/></br>
 			<table border="1">
 				<tr>
 					<th><fmt:message key="pacote.nome" /></th>
