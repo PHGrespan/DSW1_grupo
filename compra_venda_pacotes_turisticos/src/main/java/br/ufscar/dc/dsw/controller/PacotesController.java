@@ -56,7 +56,7 @@ public class PacotesController extends HttpServlet {
     private void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 		List<PacoteTuristico> listaPacotes = null;
-        listaPacotes = dao.getAll();
+        listaPacotes = dao.getAllDisponiveis();
 		request.setAttribute("listaPacotes", listaPacotes);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/lista_pacotes.jsp");
 		dispatcher.forward(request, response);

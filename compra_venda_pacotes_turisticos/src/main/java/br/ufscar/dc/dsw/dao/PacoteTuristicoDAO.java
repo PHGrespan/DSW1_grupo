@@ -101,6 +101,39 @@ public class PacoteTuristicoDAO extends GenericDAO {
         return listaPacotes;
     }
 
+    public List<PacoteTuristico> getAllDisponiveis() {
+
+        List<PacoteTuristico> listaPacotes = new ArrayList<>();
+        PacoteTuristico pacote = null;
+        String sql = "SELECT * FROM TB_PACOTE_TURISTICO";
+
+        try {
+        	Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            ResultSet resultSet = statement.executeQuery(); 
+            Date dataAtual = new Date();
+
+            while (resultSet.next()) {
+                pacote = getValues(resultSet);
+                
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
+                Date data = formato.parse(pacote.getDataPartida());
+                if(dataAtual.before(data)) {
+                	listaPacotes.add(pacote);
+                }
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+
+        } catch (SQLException e) {
+        } catch (ParseException e) {
+        }
+        return listaPacotes;
+    }
+
     public void delete(PacoteTuristico pacote) {
         String sql = "DELETE FROM TB_PACOTE_TURISTICO WHERE NOME=?";
 
@@ -178,6 +211,17 @@ public class PacoteTuristicoDAO extends GenericDAO {
 
             statement.setString(1, cnpj);
             ResultSet resultSet = statement.executeQuery();
+            Date dataAtual = new Date();
+
+            while (resultSet.next()) {
+                pacote = getValues(resultSet);
+                
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
+                Date data = formato.parse(pacote.getDataPartida());
+                if(dataAtual.before(data)) {
+                	listaPacotes.add(pacote);
+                }
+            }
 
             while (resultSet.next()) {
             	pacote = getValues(resultSet);
@@ -189,6 +233,8 @@ public class PacoteTuristicoDAO extends GenericDAO {
             conn.close();
 
         } catch (SQLException e) {
+            return getAll();
+        } catch (ParseException e){
             return getAll();
         }
         return listaPacotes;
@@ -207,6 +253,17 @@ public class PacoteTuristicoDAO extends GenericDAO {
             String formatado = "%" + destinos + "%";
             statement.setString(1, formatado);
             ResultSet resultSet = statement.executeQuery();
+            Date dataAtual = new Date();
+
+            while (resultSet.next()) {
+                pacote = getValues(resultSet);
+                
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
+                Date data = formato.parse(pacote.getDataPartida());
+                if(dataAtual.before(data)) {
+                	listaPacotes.add(pacote);
+                }
+            }
 
             while (resultSet.next()) {
             	pacote = getValues(resultSet);
@@ -219,11 +276,13 @@ public class PacoteTuristicoDAO extends GenericDAO {
 
         } catch (SQLException e) {
             return getAll();
+        } catch (ParseException e){
+            return getAll();
         }
         return listaPacotes;
     }
 
-    public List<PacoteTuristico> getAllByData(String data) {
+    public List<PacoteTuristico> getAllByData(String dataReq) {
 
         List<PacoteTuristico> listaPacotes = new ArrayList<>();
         PacoteTuristico pacote = null;
@@ -233,9 +292,20 @@ public class PacoteTuristicoDAO extends GenericDAO {
         	Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
             
-            String formatado = "%" + data + "%";
+            String formatado = "%" + dataReq + "%";
             statement.setString(1, formatado);
             ResultSet resultSet = statement.executeQuery();
+            Date dataAtual = new Date();
+
+            while (resultSet.next()) {
+                pacote = getValues(resultSet);
+                
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
+                Date data = formato.parse(pacote.getDataPartida());
+                if(dataAtual.before(data)) {
+                	listaPacotes.add(pacote);
+                }
+            }
 
             while (resultSet.next()) {
             	pacote = getValues(resultSet);
@@ -247,6 +317,8 @@ public class PacoteTuristicoDAO extends GenericDAO {
             conn.close();
 
         } catch (SQLException e) {
+            return getAll();
+        } catch (ParseException e){
             return getAll();
         }
         return listaPacotes;

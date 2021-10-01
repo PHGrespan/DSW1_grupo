@@ -27,6 +27,11 @@
 			<a href="${pageContext.request.contextPath}/pacotes">
 				<fmt:message key="lista.pacotes" />
 			</a>
+			<br/>
+			<br/>
+			<a href="${pageContext.request.contextPath}/cliente">
+				<fmt:message key="global.voltar" />
+			</a>
 			<h3><fmt:message key="pacote.list" /></h3>
 			<form method="post" action="${pageContext.request.contextPath}/pacotes/filtrar">
 				<table>
