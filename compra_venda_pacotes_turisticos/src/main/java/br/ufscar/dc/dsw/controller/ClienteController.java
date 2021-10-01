@@ -7,6 +7,7 @@ import br.ufscar.dc.dsw.dao.PacoteTuristicoDAO;
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Compra;
 import br.ufscar.dc.dsw.domain.PacoteTuristico;
+import br.ufscar.dc.dsw.util.Mail;
 
 import java.io.IOException;
 import java.util.List;
@@ -128,19 +129,17 @@ public class ClienteController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         
         Cliente cliente = (Cliente) request.getSession().getAttribute("usuarioLogado");
-        /*String email = cliente.getEmail();
-        String senha = cliente.getSenha();
-        String cpf = cliente.getCpf();
-        String isAdm = cliente.getIsAdm();
-        String nome = cliente.getNome();
-        String tel = cliente.getTelefone();
-        String sexo = cliente.getSexo();
-        String dataNasc = cliente.getDataNasc();*/
-        
+
         String nome = request.getParameter("nome");
         
         PacoteTuristico pacote = dao_pacotes.getByNome(nome);
 
+        try {
+            // Envia e-mail
+            Mail email = new Mail();
+            email.sendMail(cliente.getEmail());
+        } catch (Exception e){
+        }
         Compra compra = new Compra(cliente, pacote);
         dao_compra.insert(compra);
         response.sendRedirect("lista");
