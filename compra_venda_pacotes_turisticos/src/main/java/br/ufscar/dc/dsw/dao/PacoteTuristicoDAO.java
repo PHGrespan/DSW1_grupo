@@ -112,7 +112,6 @@ public class PacoteTuristicoDAO extends GenericDAO {
             statement.close();
             conn.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
