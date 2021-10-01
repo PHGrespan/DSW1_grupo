@@ -2,7 +2,10 @@ package br.ufscar.dc.dsw.controller;
 
 
 import br.ufscar.dc.dsw.dao.AgenciaTurismoDAO;
+import br.ufscar.dc.dsw.dao.PacoteTuristicoDAO;
 import br.ufscar.dc.dsw.domain.AgenciaTurismo;
+import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.domain.PacoteTuristico;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,10 +22,13 @@ public class AgenciaController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private AgenciaTurismoDAO dao;
+    private PacoteTuristicoDAO dao_pacotes;
+    
 
     @Override
     public void init() {
         dao = new AgenciaTurismoDAO();
+        dao_pacotes = new PacoteTuristicoDAO();
     }
 
     @Override
@@ -47,20 +53,20 @@ public class AgenciaController extends HttpServlet {
 
         try {
             switch (action) {
-                // case "/cadastro":
-                //     apresentaFormCadastro(request, response);
-                //     break;
+                case "/cadastro":
+                     apresentaFormCadastro(request, response);
+                     break;
                 case "/insercao":
-                    insere(request, response);
+                    inserePacote(request, response);
                     break;
                 case "/remocao":
-                    remove(request, response);
+                    removePacote(request, response);
                     break;
-                // case "/edicao":
-                //     apresentaFormEdicao(request, response);
-                //     break;
+                case "/edicao":
+                     apresentaFormEdicao(request, response);
+                     break;
                 case "/atualizacao":
-                    atualize(request, response);
+                    atualizePacote(request, response);
                     break;
                 default:
                     lista(request, response);
@@ -72,8 +78,9 @@ public class AgenciaController extends HttpServlet {
     }
 
     private void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<AgenciaTurismo> listaAgencia = dao.getAll();
-        request.setAttribute("listaAgencia", listaAgencia);
+    	AgenciaTurismo agencia = (AgenciaTurismo) request.getSession().getAttribute("agenciaLogada");
+    	List<PacoteTuristico> listaPacotes = dao_pacotes.getAllByCnpj(agencia.getCnpj());
+        request.setAttribute("listaPacotes", listaPacotes);
        
         RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/lista.jsp");
         dispatcher.forward(request, response);
@@ -87,57 +94,61 @@ public class AgenciaController extends HttpServlet {
     //     return usuarios;
     // }
 
-    // private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
-    //         throws ServletException, IOException {
-    //     request.setAttribute("usuarios", getUsers());
-    //     RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/formulario.jsp");
-    //     dispatcher.forward(request, response);
-    // }
+     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
+             throws ServletException, IOException {
+         RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/formulario.jsp");
+         dispatcher.forward(request, response);
+     }
 
-    // private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
-    //         throws ServletException, IOException {
-    //     String cnpj = request.getParameter("cnpj");
-    //     AgenciaTurismo agencia = dao.getByCnpj(cnpj);
-    //     request.setAttribute("agencia", agencia);
-    //     request.setAttribute("usuarios", getUsers());
-    //     RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/formulario.jsp");
-    //     dispatcher.forward(request, response);
-    // }
+    private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
+             throws ServletException, IOException {
+         String nome = request.getParameter("nome");
+         PacoteTuristico pacote = dao_pacotes.getByNome(nome);
+         request.setAttribute("pacote", pacote);
+         RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/formulario.jsp");
+         dispatcher.forward(request, response);
+    }
 
-    private void insere(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void inserePacote(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
-        String cnpj = request.getParameter("cnpj");
         String nome = request.getParameter("nome");
+        String dataPartida = request.getParameter("dataPartida");
+        int duracao = Integer.parseInt(request.getParameter("duracao"));
+        float valor = Float.parseFloat(request.getParameter("valor"));
         String descricao = request.getParameter("descricao");
-
-        AgenciaTurismo agencia = new AgenciaTurismo(email, senha, cnpj, nome, descricao);
-        dao.insert(agencia);
+        String destinos = request.getParameter("destinos");
+        String fotos = request.getParameter("fotos");
+        AgenciaTurismo agencia = (AgenciaTurismo) request.getSession().getAttribute("agenciaLogada");
+        PacoteTuristico pacote = new PacoteTuristico(nome, agencia, dataPartida, duracao, valor, descricao, destinos, fotos);
+        dao_pacotes.insert(pacote);
         response.sendRedirect("lista");
     }
 
-    private void atualize(HttpServletRequest request, HttpServletResponse response)
+    private void atualizePacote(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
-        String cnpj = request.getParameter("cnpj");
+
         String nome = request.getParameter("nome");
+        String dataPartida = request.getParameter("dataPartida");
+        int duracao = Integer.parseInt(request.getParameter("duracao"));
+        float valor = Float.parseFloat(request.getParameter("valor"));
         String descricao = request.getParameter("descricao");
+        String destinos = request.getParameter("destinos");
+        String fotos = request.getParameter("fotos");
+        AgenciaTurismo agencia = (AgenciaTurismo) request.getSession().getAttribute("agenciaLogada");
         
         
-        AgenciaTurismo agencia = new AgenciaTurismo(email, senha, cnpj, nome, descricao);
-        dao.update(agencia);
+        PacoteTuristico pacote = new PacoteTuristico(nome, agencia, dataPartida, duracao, valor, descricao, destinos, fotos);
+        dao_pacotes.update(pacote);
         response.sendRedirect("lista");
     }
 
-    private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String cnpj = request.getParameter("cnpj");
+    private void removePacote(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String nome = request.getParameter("nome");
 
-        dao.delete(dao.getByCnpj(cnpj));
+        dao_pacotes.delete(dao_pacotes.getByNome(nome));
         response.sendRedirect("lista");
     }
 }

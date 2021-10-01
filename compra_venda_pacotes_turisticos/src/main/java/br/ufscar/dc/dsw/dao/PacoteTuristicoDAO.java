@@ -132,14 +132,13 @@ public class PacoteTuristicoDAO extends GenericDAO {
 
         List<PacoteTuristico> listaPacotes = new ArrayList<>();
         PacoteTuristico pacote = null;
-        String sql = "SELECT * FROM TB_PACOTE_TURISTICO WHERE CNPJ LIKE ?";
+        String sql = "SELECT * FROM TB_PACOTE_TURISTICO WHERE CNPJ=?";
 
         try {
         	Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            String formatado = "%" + cnpj + "%";
-            statement.setString(1, formatado);
+            statement.setString(1, cnpj);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
