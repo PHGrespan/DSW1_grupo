@@ -199,6 +199,35 @@ public class PacoteTuristicoDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public List<PacoteTuristico> getAllAgencia(String cnpj) {
+
+        List<PacoteTuristico> listaPacotes = new ArrayList<>();
+        PacoteTuristico pacote = null;
+        String sql = "SELECT * FROM TB_PACOTE_TURISTICO WHERE CNPJ=?";
+
+        try {
+        	Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, cnpj);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+            	pacote = getValues(resultSet);
+                listaPacotes.add(pacote);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            return getAll();
+        }
+        return listaPacotes;
+    }
+
     public List<PacoteTuristico> getAllByCnpj(String cnpj) {
 
         List<PacoteTuristico> listaPacotes = new ArrayList<>();
@@ -221,11 +250,6 @@ public class PacoteTuristicoDAO extends GenericDAO {
                 if(dataAtual.before(data)) {
                 	listaPacotes.add(pacote);
                 }
-            }
-
-            while (resultSet.next()) {
-            	pacote = getValues(resultSet);
-                listaPacotes.add(pacote);
             }
 
             resultSet.close();
@@ -265,11 +289,6 @@ public class PacoteTuristicoDAO extends GenericDAO {
                 }
             }
 
-            while (resultSet.next()) {
-            	pacote = getValues(resultSet);
-                listaPacotes.add(pacote);
-            }
-
             resultSet.close();
             statement.close();
             conn.close();
@@ -305,11 +324,6 @@ public class PacoteTuristicoDAO extends GenericDAO {
                 if(dataAtual.before(data)) {
                 	listaPacotes.add(pacote);
                 }
-            }
-
-            while (resultSet.next()) {
-            	pacote = getValues(resultSet);
-                listaPacotes.add(pacote);
             }
 
             resultSet.close();

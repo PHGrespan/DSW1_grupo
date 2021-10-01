@@ -78,7 +78,7 @@ public class AgenciaController extends HttpServlet {
 
     private void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	AgenciaTurismo agencia = (AgenciaTurismo) request.getSession().getAttribute("agenciaLogada");
-    	List<PacoteTuristico> listaPacotes = dao_pacotes.getAllByCnpj(agencia.getCnpj());
+    	List<PacoteTuristico> listaPacotes = dao_pacotes.getAllAgencia(agencia.getCnpj());
         request.setAttribute("listaPacotes", listaPacotes);
        
         RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/agencia/lista.jsp");
