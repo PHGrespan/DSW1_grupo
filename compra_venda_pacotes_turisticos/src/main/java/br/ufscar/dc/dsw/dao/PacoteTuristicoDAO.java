@@ -128,6 +128,93 @@ public class PacoteTuristicoDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
     }
+    public List<PacoteTuristico> getAllByCnpj(String cnpj) {
+
+        List<PacoteTuristico> listaPacotes = new ArrayList<>();
+        PacoteTuristico pacote = null;
+        String sql = "SELECT * FROM TB_PACOTE_TURISTICO WHERE CNPJ LIKE ?";
+
+        try {
+        	Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            String formatado = "%" + cnpj + "%";
+            statement.setString(1, formatado);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+            	pacote = getValues(resultSet);
+                listaPacotes.add(pacote);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            return getAll();
+        }
+        return listaPacotes;
+    }
+
+    public List<PacoteTuristico> getAllByDestinos(String destinos) {
+
+        List<PacoteTuristico> listaPacotes = new ArrayList<>();
+        PacoteTuristico pacote = null;
+        String sql = "SELECT * FROM TB_PACOTE_TURISTICO WHERE DESTINOS LIKE ?";
+
+        try {
+        	Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            String formatado = "%" + destinos + "%";
+            statement.setString(1, formatado);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+            	pacote = getValues(resultSet);
+                listaPacotes.add(pacote);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            return getAll();
+        }
+        return listaPacotes;
+    }
+
+    public List<PacoteTuristico> getAllByData(String data) {
+
+        List<PacoteTuristico> listaPacotes = new ArrayList<>();
+        PacoteTuristico pacote = null;
+        String sql = "SELECT * FROM TB_PACOTE_TURISTICO WHERE DATA_PARTIDA LIKE ?";
+
+        try {
+        	Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            String formatado = "%" + data + "%";
+            statement.setString(1, formatado);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+            	pacote = getValues(resultSet);
+                listaPacotes.add(pacote);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            return getAll();
+        }
+        return listaPacotes;
+    }
+
 
     private PacoteTuristico getValues(ResultSet resultSet){
         try{

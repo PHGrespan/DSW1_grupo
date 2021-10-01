@@ -28,8 +28,7 @@
             <table>
                 <tr>
                     <th><fmt:message key="login" />:</th>
-                    <td><input type="text" name="login"
-                               value="${param.login}"/></td>
+                    <td><input type="text" name="login" value="${param.login}"/></td>
                 </tr>
                 <tr>
                     <th><fmt:message key="senha" />:</th>

@@ -1,10 +1,7 @@
 package br.ufscar.dc.dsw.controller;
 
-
 import br.ufscar.dc.dsw.dao.PacoteTuristicoDAO;
-import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.PacoteTuristico;
-import br.ufscar.dc.dsw.util.Erro;
 
 import java.io.IOException;
 import java.util.List;
@@ -35,7 +32,6 @@ public class PacotesController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	request.getSession();
-    	Erro erros = new Erro();
 		
         String action = request.getPathInfo();
         if (action == null) {
@@ -44,9 +40,12 @@ public class PacotesController extends HttpServlet {
 
         try {
             switch (action) {
-            	 default:
+                case "/filtrar":
+                    listaFiltrada(request, response);
+                break;
+                default:
                     lista(request, response);
-                    break;
+                break;
                 
             }
         } catch (RuntimeException | IOException | ServletException e) {
@@ -55,10 +54,34 @@ public class PacotesController extends HttpServlet {
     }
     
     private void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<PacoteTuristico> listaPacotes = dao.getAll();
+        request.setCharacterEncoding("UTF-8");
+		List<PacoteTuristico> listaPacotes = null;
+        listaPacotes = dao.getAll();
 		request.setAttribute("listaPacotes", listaPacotes);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/lista_pacotes.jsp");
 		dispatcher.forward(request, response);
 	}
+
+    private void listaFiltrada(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+		List<PacoteTuristico> listaPacotes = null;
+        String tipo = request.getParameter("tipo");
+        String filtro = request.getParameter("filtro");
+        switch (tipo) {
+            case "agencia":
+                listaPacotes = dao.getAllByCnpj(filtro);
+            break;
+            case "destinos":
+                listaPacotes = dao.getAllByDestinos(filtro);
+            break;
+            case "data":
+                listaPacotes = dao.getAllByData(filtro);
+            break;
+        }
+		request.setAttribute("listaPacotes", listaPacotes);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/lista_pacotes.jsp");
+		dispatcher.forward(request, response);
+	}
+
 }
     

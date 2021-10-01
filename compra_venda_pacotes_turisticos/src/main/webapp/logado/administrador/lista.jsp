@@ -18,7 +18,7 @@
 			<h1>
 				<fmt:message key="adm.welcome" />
 			</h1>
-			<a href="${pageContext.request.contextPath}/logout.jsp">
+			<a href="${pageContext.request.contextPath}/index.jsp">
 				<fmt:message key="exit.link" />
 			</a>
 			<br/>

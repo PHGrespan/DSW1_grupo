@@ -7,12 +7,9 @@ import br.ufscar.dc.dsw.dao.PacoteTuristicoDAO;
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Compra;
 import br.ufscar.dc.dsw.domain.PacoteTuristico;
-import br.ufscar.dc.dsw.util.Erro;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,7 +42,6 @@ public class ClienteController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		Cliente cliente = (Cliente) request.getSession().getAttribute("usuarioLogado");
-		Erro erros = new Erro();
 
 		if (cliente == null) {
 			response.sendRedirect(request.getContextPath());

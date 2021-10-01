@@ -3,12 +3,9 @@ package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.AgenciaTurismoDAO;
 import br.ufscar.dc.dsw.domain.AgenciaTurismo;
-import br.ufscar.dc.dsw.util.Erro;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,7 +34,6 @@ public class AgenciaController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		AgenciaTurismo agencia = (AgenciaTurismo) request.getSession().getAttribute("agenciaLogada");
-		Erro erros = new Erro();
 
 		if (agencia == null) {
 			response.sendRedirect(request.getContextPath());

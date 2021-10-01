@@ -35,7 +35,6 @@ public class ClienteDAO extends GenericDAO {
             conn.close();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -102,7 +101,6 @@ public class ClienteDAO extends GenericDAO {
             statement.close();
             conn.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
