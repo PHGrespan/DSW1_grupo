@@ -1,0 +1,25 @@
+Não logado:
+OK    - listar pacotes turisticos de todas as agencias
+OK    - opção de filtrar destino, por agência de turismo ou por data de partida.
+
+
+Cliente:
+OK    IS_ADM = 'SIM'
+OK        - login
+OK        - CRUD usuario
+OK        - CRUD agencia
+OK    IS_ADM = 'NAO'
+OK        - login
+OK        - listar pacotes turisticos de todas as agencias (REAPORVEITAR DO NAO LOGADO)
+OK        - opção de filtrar destino, por agênciade turismo ou por data de partida.
+OK        - incluir compra de pacote
+PROBLEMA COM O HOST E PORTA        - enviar e-mail
+OK        - listar pacotes comprados (filtrar por CPF)
+        
+
+
+Agencia:
+OK    - login
+    - criar pacote turístico
+    - listar pacotes turisticos APENAS da agencia (filtrar por CNPJ)
+        opção de filtrar por pacotes com data de partida posterior a atual
