@@ -13,13 +13,13 @@ OK        - login
 OK        - listar pacotes turisticos de todas as agencias (REAPORVEITAR DO NAO LOGADO)
 OK        - opção de filtrar destino, por agênciade turismo ou por data de partida.
 OK        - incluir compra de pacote
-PROBLEMA COM O HOST E PORTA        - enviar e-mail
+OK        - enviar e-mail
 OK        - listar pacotes comprados (filtrar por CPF)
         
 
 
 Agencia:
 OK    - login
-    - criar pacote turístico
-    - listar pacotes turisticos APENAS da agencia (filtrar por CNPJ)
-        opção de filtrar por pacotes com data de partida posterior a atual
+OK    - criar pacote turístico
+OK    - listar pacotes turisticos APENAS da agencia (filtrar por CNPJ)
+OK        opção de filtrar por pacotes com data de partida posterior a atual
