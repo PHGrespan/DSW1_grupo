@@ -1,5 +1,7 @@
 package br.ufscar.dc.dsw.domain;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -9,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "PACOTE")
+@Table(name = "Pacote")
 public class Pacote  extends AbstractEntity<Long> {
 
     @NotBlank
@@ -22,7 +24,7 @@ public class Pacote  extends AbstractEntity<Long> {
 
     @NotBlank
     @ManyToOne
-    @JoinColumn(name = "CNPJ_AGENCIA")
+    @JoinColumn(name = "agencia_cnpj")
     @Column(nullable = false, length = 50)
 	private Agencia agencia;
 
@@ -35,8 +37,8 @@ public class Pacote  extends AbstractEntity<Long> {
     private Integer duracao;
 
     @NotBlank
-    @Column(nullable = false)
-    private Float valor;
+    @Column(nullable = false, columnDefinition = "DECIMAL(8,2) DEFAULT 0.0")
+    private BigDecimal preco;
 
     @NotBlank
     @Column(nullable = false, length = 255)

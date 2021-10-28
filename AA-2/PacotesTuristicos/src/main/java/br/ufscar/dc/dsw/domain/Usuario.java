@@ -1,6 +1,7 @@
 package br.ufscar.dc.dsw.domain;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,9 +11,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @SuppressWarnings("serial")
-@Table(name = "USUARIO")
+@Entity
+@Table(name = "Usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Usuario extends AbstractEntity<Long>{
+public abstract class Usuario extends AbstractEntity<Long>{
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -28,7 +30,7 @@ public class Usuario extends AbstractEntity<Long>{
        
     @NotBlank
     @Column(nullable = false, length = 10)
-    private String role;
+    private String funcao;
 
     @Column(nullable = false)
     private boolean ativo;

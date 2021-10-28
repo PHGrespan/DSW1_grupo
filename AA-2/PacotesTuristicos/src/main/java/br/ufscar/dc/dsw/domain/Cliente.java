@@ -1,6 +1,5 @@
 package br.ufscar.dc.dsw.domain;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -8,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "CLIENTE")
+@Table(name = "Cliente")
 public class Cliente extends Usuario{
        
     @NotBlank
@@ -27,4 +26,5 @@ public class Cliente extends Usuario{
 
     @Column(nullable = true, length = 12)
     private String dataNasc;
+
 }
