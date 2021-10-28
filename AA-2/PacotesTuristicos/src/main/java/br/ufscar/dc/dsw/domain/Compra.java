@@ -9,8 +9,8 @@ import javax.validation.constraints.NotBlank;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "TB_COMPRA")
-public class compra {
+@Table(name = "COMPRA")
+public class Compra {
 
     @NotBlank
     @Column(nullable = false, unique = true)
@@ -25,29 +25,4 @@ public class compra {
     @ManyToMany
     @JoinColumn(name = "ID_PACOTE")
     private Pacote pacote;
-
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Cliente getCliente() {
-        return this.cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Pacote getPacote() {
-        return this.pacote;
-    }
-
-    public void setPacote(Pacote pacote) {
-        this.pacote = pacote;
-    }    
 }
