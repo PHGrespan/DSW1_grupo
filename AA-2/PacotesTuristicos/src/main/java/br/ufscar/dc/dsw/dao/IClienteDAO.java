@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import br.ufscar.dc.dsw.domain.Cliente;
 
 @SuppressWarnings("unchecked")
-public interface ClienteDAO extends CrudRepository<Cliente, Long>{
+public interface IClienteDAO extends CrudRepository<Cliente, Long>{
     
 }

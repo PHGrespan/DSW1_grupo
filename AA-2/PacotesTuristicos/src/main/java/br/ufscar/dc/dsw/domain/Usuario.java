@@ -21,7 +21,7 @@ public abstract class Usuario extends AbstractEntity<Long>{
 	private Long id;
 
     @NotBlank
-    @Column(nullable = false, length = 20, unique = true)
+    @Column(nullable = false, length = 155, unique = true)
     private String email;
     
 	@NotBlank
@@ -34,4 +34,50 @@ public abstract class Usuario extends AbstractEntity<Long>{
 
     @Column(nullable = false)
     private boolean ativo;
+
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return this.senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getFuncao() {
+        return this.funcao;
+    }
+
+    public void setFuncao(String funcao) {
+        this.funcao = funcao;
+    }
+
+    public boolean isAtivo() {
+        return this.ativo;
+    }
+
+    public boolean getAtivo() {
+        return this.ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
 }

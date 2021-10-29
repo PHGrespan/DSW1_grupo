@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Compra")
-public class Compra {
+public class Compra extends AbstractEntity<Long>{
 
     @NotBlank
     @Column(nullable = false, unique = true)
@@ -24,11 +24,44 @@ public class Compra {
     
     @NotBlank
     @ManyToOne
-    @JoinColumn(name = "cliente_cpf")
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     @NotBlank
     @ManyToOne
     @JoinColumn(name = "pacote_id")
     private Pacote pacote;
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public BigDecimal getPreco() {
+        return this.preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
+    public Cliente getCliente() {
+        return this.cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Pacote getPacote() {
+        return this.pacote;
+    }
+
+    public void setPacote(Pacote pacote) {
+        this.pacote = pacote;
+    }
+
 }
