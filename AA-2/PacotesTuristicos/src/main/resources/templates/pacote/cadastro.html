@@ -58,7 +58,8 @@
 						<label for="data">Data</label> 
 						<input type="text" class="form-control" id="data" placeholder="Data"
 							autofocus="autofocus" th:field="*{data}"
-							th:classappend="${#fields.hasErrors('data')} ? is-invalid" />
+							th:classappend="${#fields.hasErrors('data')} ? is-invalid" 
+							data-mask="00/00/0000" data-mask-reverse="true"/>
 
 						<div class="invalid-feedback">
 							<span th:errors="*{data}"></span>

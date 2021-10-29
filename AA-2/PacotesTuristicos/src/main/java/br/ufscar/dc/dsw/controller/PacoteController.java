@@ -78,7 +78,7 @@ public class PacoteController {
 		return "redirect:/pacotes/listar";
 	}
 
-	@ModelAttribute("editoras")
+	@ModelAttribute("agencias")
 	public List<Agencia> listaEditoras() {
 		return agenciaService.buscarTodos();
 	}
