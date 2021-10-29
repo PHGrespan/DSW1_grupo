@@ -1,5 +1,7 @@
 package br.ufscar.dc.dsw;
 
+import java.math.BigDecimal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -7,8 +9,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import br.ufscar.dc.dsw.dao.IAgenciaDAO;
+import br.ufscar.dc.dsw.dao.IPacoteDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 import br.ufscar.dc.dsw.domain.Agencia;
+import br.ufscar.dc.dsw.domain.Pacote;
 
 @SpringBootApplication
 public class PacotesTuristicosApplication {
@@ -20,8 +25,10 @@ public class PacotesTuristicosApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(IUsuarioDAO usuarioDAO) {
+	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, IPacoteDAO pacoteDAO, IAgenciaDAO agenciaDAO) {
 		return (args) -> {
+
+			// Agências
 			try {
 				log.info("Salvando Agencia 1");
 				Agencia a1 = new Agencia();
@@ -35,7 +42,7 @@ public class PacotesTuristicosApplication {
 				usuarioDAO.save(a1);
 				log.info("Agencia 1 salva");
 			} catch (Exception e) {
-				log.info("Falha ao salvar Agencia 1");
+				log.info("Falha ao salvar Agencia 1: " + e.getLocalizedMessage());
 			}
 			try {
 				log.info("Salvando Agencia 2");
@@ -50,7 +57,7 @@ public class PacotesTuristicosApplication {
 				usuarioDAO.save(a2);
 				log.info("Agencia 2 salva");
 			} catch (Exception e) {
-				log.info("Falha ao salvar Agencia 2");
+				log.info("Falha ao salvar Agencia 2: " + e.getLocalizedMessage());
 			}
 
 			try {
@@ -66,7 +73,42 @@ public class PacotesTuristicosApplication {
 				usuarioDAO.save(a3);
 				log.info("Agencia 3 salva");
 			} catch (Exception e) {
-				log.info("Falha ao salvar Agencia 3");
+				log.info("Falha ao salvar Agencia 3: " + e.getLocalizedMessage());
+			}
+
+			// Pacotes
+			try {
+				log.info("Salvando Pacote 1");
+				Pacote p1 = new Pacote();
+				p1.setNome("Viagem para Praia Grande");
+				p1.setAgencia(agenciaDAO.findByNome("Agência Popular"));
+				p1.setData("2021/11/21");
+				p1.setDuracao(10);
+				p1.setPreco(BigDecimal.valueOf(1000.00));
+				p1.setDescricao("Viagem para a Praia Grande, 10 dias de muito praia");
+				p1.setDestinos("Praia Grande - SP");
+				p1.setFotos("foto1");
+				pacoteDAO.save(p1);
+				log.info("Pacote 1 salvo");
+			} catch (Exception e) {
+				log.info("Falha ao salvar Pacote 1: " + e.getLocalizedMessage());
+			}
+
+			try {
+				log.info("Salvando Pacote 2");
+				Pacote p2 = new Pacote();
+				p2.setNome("Paris: a capital francesa");
+				p2.setAgencia(agenciaDAO.findByNome("EuroAgência"));
+				p2.setData("2022/05/10");
+				p2.setDuracao(15);
+				p2.setPreco(BigDecimal.valueOf(1000.00));
+				p2.setDescricao("15 dias conhecendo Paris e as cidades ao seu redor");
+				p2.setDestinos("Paris, Chartres, Crell");
+				p2.setFotos("foto de Paris");
+				pacoteDAO.save(p2);
+				log.info("Pacote 2 salvo");
+			} catch (Exception e) {
+				log.info("Falha ao salvar Pacote 2: " + e.getLocalizedMessage());
 			}
 		};
 	}

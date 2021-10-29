@@ -4,18 +4,23 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import br.ufscar.dc.dsw.validation.UniqueCPF;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Cliente")
 public class Cliente extends Usuario{
-       
+
+    @UniqueCPF(message = "{Unique.cliente.cpf}")
     @NotBlank
-    @Column(nullable = false, length = 14)
+    @Size(min = 14, max = 14, message = "{Size.cliente.cpf}")
+    @Column(nullable = false, length = 50)
     private String cpf;
     
     @NotBlank
-    @Column(nullable = false, length = 300)
+    @Column(nullable = false, length = 60)
     private String nome;
     
     @Column(nullable = true, length = 15)

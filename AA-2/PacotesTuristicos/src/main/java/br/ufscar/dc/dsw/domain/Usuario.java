@@ -2,9 +2,6 @@ package br.ufscar.dc.dsw.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
@@ -15,10 +12,6 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "Usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario extends AbstractEntity<Long>{
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
 
     @NotBlank
     @Column(nullable = false, length = 155, unique = true)
@@ -34,15 +27,6 @@ public abstract class Usuario extends AbstractEntity<Long>{
 
     @Column(nullable = false)
     private boolean ativo;
-
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return this.email;

@@ -8,56 +8,42 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Pacote")
 public class Pacote  extends AbstractEntity<Long> {
 
-    @NotBlank
-    @Column(nullable = false, unique = true)
-    private Long id;
-
-    @NotBlank
-    @Column(nullable = false, length = 255, unique = true)
+    @NotBlank(message = "{NotBlank.pacote.nome}")
+    @Column(nullable = false, length = 60)
     private String nome;
 
-    @NotBlank
+    @NotNull(message = "{NotNull.pacote.agencia}")
     @ManyToOne
     @JoinColumn(name = "agencia_id")
 	private Agencia agencia;
 
-    @NotBlank
+    @NotBlank(message = "{NotBlank.pacote.data}")
     @Column(nullable = false, length = 12)
-    private String dataPartida;
+    private String data;
 
-    @NotBlank
+    @NotNull(message = "{NotNull.pacote.duracao}")
     @Column(nullable = false)
     private Integer duracao;
 
-    @NotBlank
+    @NotNull(message = "{NotNull.pacote.preco}")
     @Column(nullable = false, columnDefinition = "DECIMAL(8,2) DEFAULT 0.0")
     private BigDecimal preco;
 
-    @NotBlank
     @Column(nullable = false, length = 255)
     private String descricao;
 
-    @NotBlank
     @Column(nullable = false, length = 255)
     private String destinos;
 
-    @NotBlank
     @Column(nullable = false, length = 255)
     private String fotos;
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return this.nome;
@@ -75,12 +61,12 @@ public class Pacote  extends AbstractEntity<Long> {
         this.agencia = agencia;
     }
 
-    public String getDataPartida() {
-        return this.dataPartida;
+    public String getData() {
+        return this.data;
     }
 
-    public void setDataPartida(String dataPartida) {
-        this.dataPartida = dataPartida;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public Integer getDuracao() {

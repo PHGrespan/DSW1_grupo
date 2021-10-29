@@ -10,6 +10,7 @@ import br.ufscar.dc.dsw.domain.Agencia;
 public interface IAgenciaDAO extends CrudRepository<Agencia, Long>{
     Agencia findById(long id);
     Agencia findByCnpj(String cnpj);
+    Agencia findByNome(String nome);
 	List<Agencia> findAll();
 	Agencia save(Agencia agencia);
 	void deleteById(Long id);

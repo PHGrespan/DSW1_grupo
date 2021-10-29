@@ -7,18 +7,24 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import br.ufscar.dc.dsw.validation.UniqueCNPJ;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Agencia")
 public class Agencia extends Usuario{
 
+    @UniqueCNPJ(message = "{Unique.agencia.cnpj}")
     @NotBlank
+    @Size(min = 18, max = 18, message = "{Size.agencia.cnpj}")
     @Column(nullable = false, length = 50)
 	private String cnpj;
 
     @NotBlank
-    @Column(nullable = false, length = 300)
+	@Size(min = 3, max = 60)
+    @Column(nullable = false, unique = true, length = 60)
 	private String nome;
 
     @Column(nullable = true, length = 255)

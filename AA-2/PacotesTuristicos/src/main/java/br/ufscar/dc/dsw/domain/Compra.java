@@ -15,10 +15,6 @@ import javax.validation.constraints.NotBlank;
 public class Compra extends AbstractEntity<Long>{
 
     @NotBlank
-    @Column(nullable = false, unique = true)
-    private Long id;
-
-    @NotBlank
     @Column(nullable = false, columnDefinition = "DECIMAL(8,2) DEFAULT 0.0")
     private BigDecimal preco;
     
@@ -31,14 +27,6 @@ public class Compra extends AbstractEntity<Long>{
     @ManyToOne
     @JoinColumn(name = "pacote_id")
     private Pacote pacote;
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public BigDecimal getPreco() {
         return this.preco;
