@@ -1,6 +1,0 @@
-1.  configuração do # MySQL
-    spring.datasource.url = jdbc:mysql://localhost:3306/Agencia
-    spring.datasource.username = root
-    spring.datasource.password = root
-
-2.  criação da tabela Agencia no banco
