@@ -13,6 +13,7 @@ import br.ufscar.dc.dsw.dao.IAgenciaDAO;
 import br.ufscar.dc.dsw.dao.IPacoteDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 import br.ufscar.dc.dsw.domain.Agencia;
+import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Pacote;
 
 @SpringBootApplication
@@ -41,6 +42,24 @@ public class PacotesTuristicosApplication {
 				a1.setDescricao("Agência destinada a venda de pacotes para a Europa.");
 				usuarioDAO.save(a1);
 				log.info("Agencia 1 salva");
+			} catch (Exception e) {
+				log.info("Falha ao salvar Agencia 1: " + e.getLocalizedMessage());
+			}
+
+			try {
+				log.info("Salvando Cliente 1");
+				Cliente a1 = new Cliente();
+				a1.setEmail("alan@gmail.com");
+				a1.setSenha("alan");
+				a1.setFuncao("Cliente");
+				a1.setAtivo(true);
+				a1.setCpf("111.111.111-11");
+				a1.setNome("Alan");
+				a1.setSexo("Masculino");
+				a1.setDataNasc("28/10/2003");
+				a1.setTelefone("9999-9999");
+				usuarioDAO.save(a1);
+				log.info("Cliente 1 salvo");
 			} catch (Exception e) {
 				log.info("Falha ao salvar Agencia 1: " + e.getLocalizedMessage());
 			}
