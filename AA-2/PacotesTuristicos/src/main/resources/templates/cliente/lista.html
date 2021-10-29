@@ -30,6 +30,9 @@
 					<thead>
 						<tr>
 							<th>#</th>
+							<th>Email</th>
+							<th>Função</th>
+							<th>Ativo</th>
 							<th>CPF</th>
 							<th>Nome</th>
 							<th>Telefone</th>
@@ -41,6 +44,9 @@
 					<tbody>
 						<tr th:each="cliente : ${clientes}">
 							<td th:text="${cliente.id}"></td>
+							<td th:text="${cliente.email}"></td>
+							<td th:text="${cliente.funcao}"></td>
+							<td th:text="${cliente.ativo}"></td>
 							<td th:text="${cliente.cpf}"></td>
 							<td th:text="${cliente.nome}"></td>
 							<td th:text="${cliente.telefone}"></td>

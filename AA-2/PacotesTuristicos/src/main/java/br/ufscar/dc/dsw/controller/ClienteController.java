@@ -2,6 +2,7 @@ package br.ufscar.dc.dsw.controller;
 
 import javax.validation.Valid;
 
+import org.hibernate.result.Output;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
