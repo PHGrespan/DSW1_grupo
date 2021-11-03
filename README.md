@@ -8,7 +8,9 @@ Alunos:
 <br/>
 <br/>
 ## Executar o Projeto
+<br/>
 ### AA-2
+<br/>
 1. Para executar a segunda parte do projeto é necessário que esteja intalado o Maven, MySQL e Java 8
 2. Abra um terminal na pasta PacotesTuristicos, presente no repositório (/DSW1_grupo/AA-2/PacotesTuristicos)
 3. Execute o comando mvn spring-boot:run para compilar e executar o projeto
