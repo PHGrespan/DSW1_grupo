@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.ufscar.dc.dsw.dao.IAgenciaDAO;
 import br.ufscar.dc.dsw.dao.IPacoteDAO;
@@ -15,6 +16,7 @@ import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 import br.ufscar.dc.dsw.domain.Agencia;
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Pacote;
+import br.ufscar.dc.dsw.domain.Usuario;
 
 @SpringBootApplication
 public class PacotesTuristicosApplication {
@@ -26,9 +28,28 @@ public class PacotesTuristicosApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, IPacoteDAO pacoteDAO, IAgenciaDAO agenciaDAO) {
+	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, BCryptPasswordEncoder encoder, IPacoteDAO pacoteDAO, IAgenciaDAO agenciaDAO) {
 		return (args) -> {
 
+			// Clientes
+
+			try {
+				log.info("Salvando Cliente 1");
+				Cliente a1 = new Cliente();
+				a1.setEmail("alan");
+				a1.setSenha(encoder.encode("alan"));
+				a1.setFuncao("ROLE_ADMIN");
+				a1.setAtivo(true);
+				a1.setCpf("111.111.111-11");
+				a1.setNome("Alan");
+				a1.setSexo("Masculino");
+				a1.setDataNasc("28/10/2003");
+				a1.setTelefone("9999-9999");
+				usuarioDAO.save(a1);
+				log.info("Cliente 1 salvo");
+			} catch (Exception e) {
+				log.info("Falha ao salvar Agencia 1: " + e.getLocalizedMessage());
+			}
 			// Agências
 			try {
 				log.info("Salvando Agencia 1");
@@ -46,23 +67,6 @@ public class PacotesTuristicosApplication {
 				log.info("Falha ao salvar Agencia 1: " + e.getLocalizedMessage());
 			}
 
-			try {
-				log.info("Salvando Cliente 1");
-				Cliente a1 = new Cliente();
-				a1.setEmail("alan@gmail.com");
-				a1.setSenha("alan");
-				a1.setFuncao("Cliente");
-				a1.setAtivo(true);
-				a1.setCpf("111.111.111-11");
-				a1.setNome("Alan");
-				a1.setSexo("Masculino");
-				a1.setDataNasc("28/10/2003");
-				a1.setTelefone("9999-9999");
-				usuarioDAO.save(a1);
-				log.info("Cliente 1 salvo");
-			} catch (Exception e) {
-				log.info("Falha ao salvar Agencia 1: " + e.getLocalizedMessage());
-			}
 			try {
 				log.info("Salvando Agencia 2");
 				Agencia a2 = new Agencia();

@@ -54,8 +54,10 @@ public class ClienteController {
     @PostMapping("/editar")
 	public String editar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attr) {
 		
+		System.out.println(cliente.getId());
+
 		if (result.hasErrors()) {
-			return "agencia/cadastro";
+			return "cliente/cadastro";
 		}
 
 		service.salvar(cliente);
