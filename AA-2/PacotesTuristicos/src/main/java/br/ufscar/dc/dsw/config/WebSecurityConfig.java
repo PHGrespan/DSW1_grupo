@@ -41,8 +41,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 				http.authorizeRequests()
-				.antMatchers("/error", "/login/**", "/js/**", "/css/**", "/image/**", "/webjars/**").permitAll()
-				.antMatchers("/clientes/**", "/agencias/**", "/pacotes/**").hasRole("ADMIN")
+				.antMatchers("/error", "/login/**", "/js/**", "/css/**", "/image/**", "/webjars/**", "/agencias/listar", "/pacotes/listar").permitAll()
+				.antMatchers("/clientes/cadastrar", "/clientes/editar/**", "/clientes/excluir/**", "/agencias/cadastrar", "/agencias/editar/**", "/agencias/excluir/**", "/pacotes/cadastrar", "/pacotes/editar/**", "/pacotes/excluir/**").hasRole("ADMIN")
+				.antMatchers("/pacotes/cadastrar", "/pacotes/editar/**", "/pacotes/excluir/**").hasRole("AGENCIA")
 				.anyRequest().authenticated()
 			.and()
 				.formLogin()

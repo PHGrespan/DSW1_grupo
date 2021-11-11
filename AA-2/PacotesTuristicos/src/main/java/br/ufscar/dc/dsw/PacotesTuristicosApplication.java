@@ -16,7 +16,6 @@ import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 import br.ufscar.dc.dsw.domain.Agencia;
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Pacote;
-import br.ufscar.dc.dsw.domain.Usuario;
 
 @SpringBootApplication
 public class PacotesTuristicosApplication {
@@ -32,7 +31,6 @@ public class PacotesTuristicosApplication {
 		return (args) -> {
 
 			// Clientes
-
 			try {
 				log.info("Salvando Cliente 1");
 				Cliente a1 = new Cliente();
@@ -50,13 +48,14 @@ public class PacotesTuristicosApplication {
 			} catch (Exception e) {
 				log.info("Falha ao salvar Agencia 1: " + e.getLocalizedMessage());
 			}
+			
 			// Agências
 			try {
 				log.info("Salvando Agencia 1");
 				Agencia a1 = new Agencia();
 				a1.setEmail("EuroAgencia@gmail.com");
-				a1.setSenha("EuroAgencia");
-				a1.setFuncao("Agencia");
+				a1.setSenha(encoder.encode("EuroAgencia"));
+				a1.setFuncao("ROLE_AGENCIA");
 				a1.setAtivo(true);
 				a1.setCnpj("12.341.234/0001-88");
 				a1.setNome("EuroAgência");
@@ -71,8 +70,8 @@ public class PacotesTuristicosApplication {
 				log.info("Salvando Agencia 2");
 				Agencia a2 = new Agencia();
 				a2.setEmail("Maritima@gmail.com");
-				a2.setSenha("Maritima");
-				a2.setFuncao("Agencia");
+				a2.setSenha(encoder.encode("Maritima"));
+				a2.setFuncao("ROLE_AGENCIA");
 				a2.setAtivo(true);
 				a2.setCnpj("56.534.546/0003-45");
 				a2.setNome("Marítima");
@@ -87,8 +86,8 @@ public class PacotesTuristicosApplication {
 				log.info("Salvando Agencia 3");
 				Agencia a3 = new Agencia();
 				a3.setEmail("Popular@gmail.com");
-				a3.setSenha("Popular");
-				a3.setFuncao("Agencia");
+				a3.setSenha(encoder.encode("Popular"));
+				a3.setFuncao("ROLE_AGENCIA");
 				a3.setAtivo(true);
 				a3.setCnpj("76.234.554/0008-99");
 				a3.setNome("Agência Popular");

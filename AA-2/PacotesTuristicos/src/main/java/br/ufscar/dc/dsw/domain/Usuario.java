@@ -22,7 +22,7 @@ public abstract class Usuario extends AbstractEntity<Long>{
     private String senha;
        
     @NotBlank
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 20)
     private String funcao;
 
     @Column(nullable = false)
