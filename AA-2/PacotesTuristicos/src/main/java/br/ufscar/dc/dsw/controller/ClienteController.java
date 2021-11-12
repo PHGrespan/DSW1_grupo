@@ -38,6 +38,7 @@ public class ClienteController {
 			return "cliente/cadastro";
 		}
 
+		
         service.salvar(cliente);
 		attr.addFlashAttribute("sucess", "Cliente inserido com sucesso.");
 		
@@ -55,7 +56,7 @@ public class ClienteController {
 		
 		System.out.println(cliente.getId());
 
-		if (result.hasErrors()) {
+		if (result.getFieldErrorCount() > 1 || result.getFieldError("cpf") == null) {
 			return "cliente/cadastro";
 		}
 

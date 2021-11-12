@@ -29,7 +29,6 @@
 
 				
 				
-				<div class="form-row">
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
@@ -90,7 +89,7 @@
 						<label for="cnpj" th:text="#{info.cnpj}"></label> 
 						<input type="text" class="form-control" id="cnpj" placeholder="__.___.___/____-__"
 							autofocus="autofocus" th:field="*{cnpj}"
-							th:classappend="${#fields.hasErrors('cnpj')} ? is-invalid" 
+							th:classappend="${#fields.hasErrors('cnpj')} ? is-invalid" th:readonly="${agencia.id != null}"
 							data-mask="00.000.000/0000-00" data-mask-reverse="true" />
 						                               
 						<div class="invalid-feedback">

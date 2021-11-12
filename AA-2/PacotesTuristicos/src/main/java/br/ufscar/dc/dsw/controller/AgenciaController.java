@@ -55,7 +55,7 @@ public class AgenciaController {
 	@PostMapping("/editar")
 	public String editar(@Valid Agencia agencia, BindingResult result, RedirectAttributes attr) {
 		
-		if (result.hasErrors()) {
+		if (result.getFieldErrorCount() > 1 || result.getFieldError("cnpj") == null) {
 			return "agencia/cadastro";
 		}
 
