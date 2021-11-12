@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.*;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import br.ufscar.dc.dsw.security.ClienteDetailsServiceImpl;
+import br.ufscar.dc.dsw.security.UsuarioDetailsServiceImpl;
 
 
 
@@ -18,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public UserDetailsService userDetailsService() {
-		return new ClienteDetailsServiceImpl();
+		return new UsuarioDetailsServiceImpl();
 	}
 
 	@Bean
