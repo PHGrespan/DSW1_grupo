@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}" xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{layout}" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head>
 <meta charset="UTF-8" />
 </head>
@@ -44,9 +46,16 @@
 						<label for="agencia" th:text="#{object.agency}"></label> 
 						<select id="agencia" class="form-control" th:field="*{agencia}"
 							th:classappend="${#fields.hasErrors('agencia')} ? is-invalid">
+							<div sec:authorize="hasRole('ROLE_ADMIN')">
 							<option value="">Selecione</option>
 							<option th:each="agencia : ${agencias}" th:value="${agencia.id}"
 								th:text="${agencia.nome}"></option>
+							</div>
+
+							<div sec:authorize="hasRole('ROLE_AGENCIA')">
+							<option th:value="${agencia.id}"
+								th:text="${agencia.nome}"></option>
+							</div>
 						</select>
 
 						<div class="invalid-feedback">
