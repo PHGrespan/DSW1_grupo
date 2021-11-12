@@ -52,6 +52,12 @@ public class PacoteController {
 		return "pacote/lista";
 	}
 
+	private String getUsuario() {
+		UsuarioDetails UsuarioDetails = (UsuarioDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return UsuarioDetails.getUsuario().getFuncao();
+		
+	}
+
 	private Agencia getAgencia() {
 		UsuarioDetails UsuarioDetails = (UsuarioDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return agenciaService.buscarPorId(UsuarioDetails.getUsuario().getId());
@@ -86,8 +92,23 @@ public class PacoteController {
 
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
+
 		model.addAttribute("pacote", pacoteService.buscarPorId(id));
+
+		if(this.getUsuario().equals("ROLE_ADMIN")){
 		return "pacote/cadastro";
+	}
+		
+		else{
+		if(agenciaService.buscarPorId(this.getAgencia().getId()).getId().equals(pacoteService.buscarPorId(id).getAgencia().getId())){
+			model.addAttribute("agencia", agenciaService.buscarPorId(this.getAgencia().getId()));
+			return "pacote/cadastro";
+		}
+
+		else{
+			return "redirect:/pacotes/listar";
+		}
+	}
 	}
 
 	@PostMapping("/editar")
