@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout}" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
 </head>
@@ -11,12 +11,12 @@
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
 						<i class="oi oi-caret-right"></i>
-						<span>Lista de Agência</span>
+						<span th:text="#{list.agency}"></span>
 					</li>
 				</ul>
 				<a class="btn btn-primary btn-md" th:href="@{/agencias/cadastrar}" role="button"> 
 					<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> 
-					<span>Nova Agência</span>
+					<span th:text="#{new.agency}"></span>
 				</a>
 			</div>
 		</nav>
@@ -30,10 +30,10 @@
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>CNPJ</th>
-							<th>Nome</th>
-							<th>Descricao</th>
-							<th>Ação</th>
+							<th th:text="#{info.cnpj}"></th>
+							<th th:text="#{info.name}"></th>
+							<th th:text="#{info.description}"></th>
+							<th th:text="#{action}"></th>
 						</tr>
 					</thead>
 					<tbody>

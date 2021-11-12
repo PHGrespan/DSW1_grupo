@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout}" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
 </head>
@@ -10,11 +10,11 @@
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active"><i class="oi oi-caret-right"></i>
-						<span>Cadastrar Agências</span></li>
+						<span th:text="#{action.register.agencies}"></span></li>
 				</ul>
 				<a class="btn btn-primary btn-md" th:href="@{/agencias/listar}"
 					role="button"> <span class="oi oi-spreadsheet" title="Listar"
-					aria-hidden="true"></span> <span>Listar Agências</span>
+					aria-hidden="true"></span> <span th:text="#{action.list.agencies}"></span>
 				</a>
 			</div>
 		</nav>
@@ -33,8 +33,8 @@
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
-							<label for="email">Emaill</label> 
-							<input type="text" class="form-control" id="email" placeholder="Email"
+							<label for="email" th:text="#{info.mail}"></label> 
+							<input type="text" class="form-control" id="email" th:placeholder="#{info.mail}"
 								autofocus="autofocus" th:field="*{email}"
 								th:classappend="${#fields.hasErrors('email')} ? is-invalid" />
 	
@@ -44,8 +44,8 @@
 						</div>
 	
 						<div class="form-group col-md-6">
-							<label for="senha">Senha</label> 
-							<input type="text" class="form-control" id="senha" placeholder="Senha"
+							<label for="senha" th:text="#{info.pass}"></label> 
+							<input type="text" class="form-control" id="senha" th:placeholder="#{info.pass}"
 								autofocus="autofocus" th:field="*{senha}"
 								th:classappend="${#fields.hasErrors('senha')} ? is-invalid" />
 	
@@ -55,8 +55,8 @@
 						</div>
 	
 						<div class="form-group col-md-6">
-							<label for="funcao">Função</label> 
-							<input type="text" class="form-control" id="funcao" placeholder="Função"
+							<label for="funcao" th:text="#{info.role}"></label> 
+							<input type="text" class="form-control" id="funcao" th:placeholder="#{info.role}"
 								autofocus="autofocus" th:field="*{funcao}"
 								th:classappend="${#fields.hasErrors('funcao')} ? is-invalid" />
 	
@@ -66,8 +66,8 @@
 						</div>
 	
 						<div class="form-group col-md-6">
-							<label for="ativo">Ativo</label> 
-							<input type="text" class="form-control" id="ativo" placeholder="Ativo"
+							<label for="ativo" th:text="#{info.enabled}"></label> 
+							<input type="text" class="form-control" id="ativo" th:placeholder="#{info.enabled}"
 								autofocus="autofocus" th:field="*{ativo}"
 								th:classappend="${#fields.hasErrors('ativo')} ? is-invalid" />
 	
@@ -76,8 +76,8 @@
 							</div>
 						</div>
 					<div class="form-group col-md-6">
-						<label for="nome">Nome</label> 
-						<input type="text" class="form-control" id="nome" placeholder="Nome"
+						<label for="nome" th:text="#{info.name}"></label> 
+						<input type="text" class="form-control" id="nome" th:placeholder="#{info.name}"
 							autofocus="autofocus" th:field="*{nome}"
 							th:classappend="${#fields.hasErrors('nome')} ? is-invalid" />
 
@@ -87,7 +87,7 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="cnpj">CNPJ</label> 
+						<label for="cnpj" th:text="#{info.cnpj}"></label> 
 						<input type="text" class="form-control" id="cnpj" placeholder="__.___.___/____-__"
 							autofocus="autofocus" th:field="*{cnpj}"
 							th:classappend="${#fields.hasErrors('cnpj')} ? is-invalid" 
@@ -99,8 +99,8 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="descricao">Descrição</label> 
-						<input type="text" class="form-control" id="descricao" placeholder="Descrição"
+						<label for="descricao" th:text="#{info.description}"></label> 
+						<input type="text" class="form-control" id="descricao" th:placeholder="#{info.description}"
 							autofocus="autofocus" th:field="*{descricao}"
 							th:classappend="${#fields.hasErrors('descricao')} ? is-invalid"/>
 						                               
@@ -111,7 +111,7 @@
 				</div>
 
 				<input type="hidden" id="id" th:field="*{id}" />
-				<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+				<button type="submit" class="btn btn-primary btn-sm" th:text="#{action.save}"></button>
 			</form>
 		</div>
 	</section>

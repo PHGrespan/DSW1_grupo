@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout}" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
 </head>
@@ -10,11 +10,11 @@
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active"><i class="oi oi-caret-right"></i>
-						<span>Cadastrar Clientes</span></li>
+						<span th:text="#{action.register.customers}"></span></li>
 				</ul>
 				<a class="btn btn-primary btn-md" th:href="@{/clientes/listar}"
 					role="button"> <span class="oi oi-spreadsheet" title="Listar"
-					aria-hidden="true"></span> <span>Listar Clientes</span>
+					aria-hidden="true"></span> <span th:text="#{action.list.customers}"></span>
 				</a>
 			</div>
 		</nav>
@@ -29,8 +29,8 @@
 				
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label for="email">Emaill</label> 
-						<input type="text" class="form-control" id="email" placeholder="Email"
+						<label for="email" th:text="#{info.mail}"></label> 
+						<input type="text" class="form-control" id="email" th:placeholder="#{info.mail}"
 							autofocus="autofocus" th:field="*{email}"
 							th:classappend="${#fields.hasErrors('email')} ? is-invalid" />
 
@@ -40,8 +40,8 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="senha">Senha</label> 
-						<input type="text" class="form-control" id="senha" placeholder="Senha"
+						<label for="senha" th:text="#{info.pass}"></label> 
+						<input type="text" class="form-control" id="senha" th:placeholder="#{info.pass}"
 							autofocus="autofocus" th:field="*{senha}"
 							th:classappend="${#fields.hasErrors('senha')} ? is-invalid" />
 
@@ -51,8 +51,8 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="funcao">Função</label> 
-						<input type="text" class="form-control" id="funcao" placeholder="Função"
+						<label for="funcao" th:text="#{info.role}"></label> 
+						<input type="text" class="form-control" id="funcao" th:placeholder="#{info.role}"
 							autofocus="autofocus" th:field="*{funcao}"
 							th:classappend="${#fields.hasErrors('funcao')} ? is-invalid" />
 
@@ -62,8 +62,8 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="ativo">Ativo</label> 
-						<input type="text" class="form-control" id="ativo" placeholder="Ativo"
+						<label for="ativo" th:text="#{info.enabled}"></label> 
+						<input type="text" class="form-control" id="ativo" th:placeholder="#{info.enabled}"
 							autofocus="autofocus" th:field="*{ativo}"
 							th:classappend="${#fields.hasErrors('ativo')} ? is-invalid" />
 
@@ -73,8 +73,8 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="nome">Nome</label> 
-						<input type="text" class="form-control" id="nome" placeholder="Nome"
+						<label for="nome" th:text="#{info.name}"></label> 
+						<input type="text" class="form-control" id="nome" th:placeholder="#{info.name}"
 							autofocus="autofocus" th:field="*{nome}"
 							th:classappend="${#fields.hasErrors('nome')} ? is-invalid" />
 
@@ -84,7 +84,7 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="cnpj">CPF</label> 
+						<label for="cnpj" th:text="#{info.cpf}"></label> 
 						<input type="text" class="form-control" id="cpf" placeholder="___.___.___-__"
 							autofocus="autofocus" th:field="*{cpf}"
 							th:classappend="${#fields.hasErrors('cpf')} ? is-invalid" 
@@ -96,7 +96,7 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="telefone">Telefone</label> 
+						<label for="telefone" th:text="#{info.tel}"></label> 
 						<input type="text" class="form-control" id="telefone" placeholder="____-____"
 							autofocus="autofocus" th:field="*{telefone}"
 							th:classappend="${#fields.hasErrors('telefone')} ? is-invalid"
@@ -108,8 +108,8 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="sexo">Sexo</label> 
-						<input type="text" class="form-control" id="sexo" placeholder="Sexo"
+						<label for="sexo" th:text="#{info.sex}"></label> 
+						<input type="text" class="form-control" id="sexo" th:placeholder="#{info.sex}"
 							autofocus="autofocus" th:field="*{sexo}"
 							th:classappend="${#fields.hasErrors('sexo')} ? is-invalid"/>
 						                               
@@ -119,8 +119,8 @@
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="dataNasc">Data de Nascimento</label> 
-						<input type="text" class="form-control" id="dataNasc" placeholder="Data de Nascimento"
+						<label for="dataNasc" th:text="#{info.birth}"></label> 
+						<input type="text" class="form-control" id="dataNasc" th:placeholder="#{info.birth}"
 							autofocus="autofocus" th:field="*{dataNasc}"
 							th:classappend="${#fields.hasErrors('dataNasc')} ? is-invalid"
 							data-mask="00/00/0000" data-mask-reverse="true" />
@@ -133,7 +133,7 @@
 				</div>
 
 				<input type="hidden" id="id" th:field="*{id}" />
-				<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+				<button type="submit" class="btn btn-primary btn-sm" th:text="#{action.save}"></button>
 			</form>
 		</div>
 	</section>
