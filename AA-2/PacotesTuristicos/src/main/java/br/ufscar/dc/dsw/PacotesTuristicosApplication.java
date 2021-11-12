@@ -9,12 +9,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.yaml.snakeyaml.composer.Composer;
 
 import br.ufscar.dc.dsw.dao.IAgenciaDAO;
+import br.ufscar.dc.dsw.dao.IClienteDAO;
+import br.ufscar.dc.dsw.dao.ICompraDAO;
 import br.ufscar.dc.dsw.dao.IPacoteDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 import br.ufscar.dc.dsw.domain.Agencia;
 import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.domain.Compra;
 import br.ufscar.dc.dsw.domain.Pacote;
 
 @SpringBootApplication
@@ -27,7 +31,7 @@ public class PacotesTuristicosApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, BCryptPasswordEncoder encoder, IPacoteDAO pacoteDAO, IAgenciaDAO agenciaDAO) {
+	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, IClienteDAO clienteDAO, BCryptPasswordEncoder encoder, IPacoteDAO pacoteDAO, IAgenciaDAO agenciaDAO, ICompraDAO compraDAO) {
 		return (args) -> {
 
 			// Clientes
@@ -47,6 +51,24 @@ public class PacotesTuristicosApplication {
 				log.info("Cliente 1 salvo");
 			} catch (Exception e) {
 				log.info("Falha ao salvar Agencia 1: " + e.getLocalizedMessage());
+			}
+
+			try {
+				log.info("Salvando Cliente 2");
+				Cliente a1 = new Cliente();
+				a1.setEmail("julio");
+				a1.setSenha(encoder.encode("julio"));
+				a1.setFuncao("ROLE_USER");
+				a1.setAtivo(true);
+				a1.setCpf("711.111.111-11");
+				a1.setNome("Julio");
+				a1.setSexo("Masculino");
+				a1.setDataNasc("12/10/2007");
+				a1.setTelefone("9999-9588");
+				usuarioDAO.save(a1);
+				log.info("Cliente 2 salvo");
+			} catch (Exception e) {
+				log.info("Falha ao salvar Agencia 2: " + e.getLocalizedMessage());
 			}
 			
 			// Agências
@@ -131,6 +153,21 @@ public class PacotesTuristicosApplication {
 				log.info("Pacote 2 salvo");
 			} catch (Exception e) {
 				log.info("Falha ao salvar Pacote 2: " + e.getLocalizedMessage());
+			}
+
+			// Compras
+			try {
+				log.info("Salvando Compra Cliente 2");
+				Compra c1 = new Compra();
+				c1.setCliente(clienteDAO.getUserByEmail("julio"));
+				System.out.println("\n\n" + clienteDAO.getUserByEmail("julio").getEmail());
+				c1.setPacote(pacoteDAO.getPacoteByName("Viagem para Praia Grande"));
+				System.out.println("\n\n" + pacoteDAO.getPacoteByName("Viagem para Praia Grande").getNome());
+				c1.setPreco(BigDecimal.valueOf(1000.00));
+				compraDAO.save(c1);
+				log.info("Compra Cliente 2 salvo");
+			} catch (Exception e) {
+				log.info("Falha ao salvar Compra Cliente 2: " + e.getLocalizedMessage());
 			}
 		};
 	}

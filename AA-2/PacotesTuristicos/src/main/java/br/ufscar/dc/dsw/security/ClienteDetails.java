@@ -7,14 +7,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.Cliente;
  
 @SuppressWarnings("serial")
-public class UsuarioDetails implements UserDetails {
+public class ClienteDetails implements UserDetails {
  
-    private Usuario user;
+    private Cliente user;
      
-    public UsuarioDetails(Usuario user) {
+    public ClienteDetails(Cliente user) {
         this.user = user;
     }
  
@@ -33,6 +33,8 @@ public class UsuarioDetails implements UserDetails {
     public String getUsername() {
         return user.getEmail();
     }
+
+    
  
     @Override
     public boolean isAccountNonExpired() {
@@ -54,7 +56,7 @@ public class UsuarioDetails implements UserDetails {
         return true;
     }
 
-	public Usuario getUsuario() {
+	public Cliente getCliente() {
 		return user;
 	}
 }
