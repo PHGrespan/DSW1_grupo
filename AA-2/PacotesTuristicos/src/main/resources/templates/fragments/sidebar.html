@@ -13,16 +13,29 @@
 				</a></li>
 		</ul>
 		
-		<ul class="nav nav-pills">
-			<li class="nav-item"><span class="nav-link active" th:text="#{object.purchase}"></span></li>
-			<li class="nav-item"><a class="nav-link" th:href="@{/compras/cadastrar}"> <i class="oi oi-plus"></i>
-					<span th:text="#{action.register}"></span>
-				</a></li>
-			<li class="nav-item"><a class="nav-link" th:href="@{/compras/listar}"> <i class="oi oi-spreadsheet"></i>
-					<span th:text="#{action.list}"></span>
-				</a></li>
-		</ul>
+		<div sec:authorize="hasRole('ROLE_USER')">
+			<ul class="nav nav-pills">
+				<li class="nav-item"><span class="nav-link active" th:text="#{object.purchase}"></span></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/compras/cadastrar}"> <i class="oi oi-plus"></i>
+						<span th:text="#{action.buy}"></span>
+					</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/compras/listar}"> <i class="oi oi-spreadsheet"></i>
+						<span th:text="#{action.list}"></span>
+					</a></li>
+			</ul>
+		</div>
 
+		<div sec:authorize="hasRole('ROLE_USER')">
+			<ul class="nav nav-pills">
+				<li class="nav-item"><span class="nav-link active" th:text="#{object.agency}"></span></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/agencias/listar}"> <i class="oi oi-spreadsheet"></i>
+						<span th:text="#{action.list}"></span>
+					</a></li>
+			</ul>
+		</div>
+
+
+		<div sec:authorize="hasRole('ROLE_ADMIN')">
 		<ul class="nav nav-pills">
 			<li class="nav-item"><span class="nav-link active" th:text="#{object.customer}"></span></li>
 			<li class="nav-item"><a class="nav-link" th:href="@{/clientes/cadastrar}"> <i class="oi oi-plus"></i>
@@ -32,7 +45,10 @@
 					<span th:text="#{action.list}"></span>
 				</a></li>
 		</ul>
+	</div>
 
+
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
 		<ul class="nav nav-pills">
 			<li class="nav-item"><span class="nav-link active" th:text="#{object.agency}"></span></li>
 			<li class="nav-item"><a class="nav-link" th:href="@{/agencias/cadastrar}"> <i class="oi oi-plus"></i>
@@ -42,7 +58,9 @@
 					<span th:text="#{action.list}"></span>
 				</a></li>
 		</ul>
+	</div>
 
+	<div sec:authorize="hasRole('ROLE_ADMIN')" >
 		<ul class="nav nav-pills">
 			<li class="nav-item"><span class="nav-link active" th:text="#{object.package}"></span></li>
 			<li class="nav-item"><a class="nav-link" th:href="@{/pacotes/cadastrar}"> <i class="oi oi-plus"></i>
@@ -52,6 +70,19 @@
 					<i class="oi oi-spreadsheet"></i> <span th:text="#{action.list}"></span>
 				</a></li>
 		</ul>
+	</div>
+
+	<div sec:authorize="hasRole('ROLE_AGENCIA')" >
+		<ul class="nav nav-pills">
+			<li class="nav-item"><span class="nav-link active" th:text="#{object.package}"></span></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/pacotes/cadastrar}"> <i class="oi oi-plus"></i>
+					<span th:text="#{action.register}"></span>
+				</a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/pacotes/listar}">
+					<i class="oi oi-spreadsheet"></i> <span th:text="#{action.list}"></span>
+				</a></li>
+		</ul>
+	</div>
 	</nav>
 </body>
 

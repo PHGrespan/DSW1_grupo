@@ -160,9 +160,7 @@ public class PacotesTuristicosApplication {
 				log.info("Salvando Compra Cliente 2");
 				Compra c1 = new Compra();
 				c1.setCliente(clienteDAO.getUserByEmail("julio"));
-				System.out.println("\n\n" + clienteDAO.getUserByEmail("julio").getEmail());
 				c1.setPacote(pacoteDAO.getPacoteByName("Viagem para Praia Grande"));
-				System.out.println("\n\n" + pacoteDAO.getPacoteByName("Viagem para Praia Grande").getNome());
 				c1.setPreco(BigDecimal.valueOf(1000.00));
 				compraDAO.save(c1);
 				log.info("Compra Cliente 2 salvo");

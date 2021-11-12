@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}" xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{layout}" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head>
 <meta charset="UTF-8" />
 </head>
@@ -38,7 +40,9 @@
 							<th th:text="#{info.tel}"></th>
 							<th th:text="#{info.sex}"></th>
 							<th th:text="#{info.birth}"></th>
+							<div sec:authorize="hasRole('ROLE_ADMIN')">
 							<th th:text="#{action}"></th>
+						</div>
 						</tr>
 					</thead>
 					<tbody>
@@ -52,6 +56,7 @@
 							<td th:text="${cliente.telefone}"></td>
 							<td th:text="${cliente.sexo}"></td>
 							<td th:text="${cliente.dataNasc}"></td>
+							<div sec:authorize="hasRole('ROLE_ADMIN')">
 							<td colspan="2">
 								<a class="btn btn-info btn-sm" th:href="@{/clientes/editar/{id} (id=${cliente.id}) }"
 									role="button"> 
@@ -64,6 +69,7 @@
 									<span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
 								</button>
 							</td>
+						</div>
 						</tr>
 					</tbody>
 				</table>
