@@ -52,24 +52,20 @@
 
 					<div class="form-group col-md-6">
 						<label for="funcao" th:text="#{info.role}"></label> 
-						<input type="text" class="form-control" id="funcao" th:placeholder="#{info.role}"
-							autofocus="autofocus" th:field="*{funcao}"
-							th:classappend="${#fields.hasErrors('funcao')} ? is-invalid" />
-
-						<div class="invalid-feedback">
-							<span th:errors="*{funcao}"></span>
-						</div>
+						<select id="funcao" class="form-control" th:field="*{funcao}"
+							th:classappend="${#fields.hasErrors('funcao')} ? is-invalid">
+							<option value="ROLE_USER" th:text="#{select.customer}"></option>
+							<option value="ROLE_ADMIN" th:text="#{select.adm}"></option>
+						</select>
 					</div>
 
 					<div class="form-group col-md-6">
 						<label for="ativo" th:text="#{info.enabled}"></label> 
-						<input type="text" class="form-control" id="ativo" th:placeholder="#{info.enabled}"
-							autofocus="autofocus" th:field="*{ativo}"
-							th:classappend="${#fields.hasErrors('ativo')} ? is-invalid" />
-
-						<div class="invalid-feedback">
-							<span th:errors="*{ativo}"></span>
-						</div>
+						<select id="ativo" class="form-control" th:field="*{ativo}"
+							th:classappend="${#fields.hasErrors('ativo')} ? is-invalid">
+							<option value="TRUE" th:text="#{select.true}"></option>
+							<option value="FALSE" th:text="#{select.false}"></option>
+						</select>
 					</div>
 
 					<div class="form-group col-md-6">
