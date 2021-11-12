@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,13 +34,21 @@ public class PacoteController {
 	private IAgenciaService agenciaService;
 
 	@GetMapping("/cadastrar")
-	public String cadastrar(Pacote pacote) {
+	public String cadastrar(ModelMap model, Pacote pacote) {
+		model.addAttribute("agencia", this.getAgencia());
 		return "pacote/cadastro";
 	}
 
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 		model.addAttribute("pacotes", pacoteService.buscarTodos());
+		return "pacote/lista";
+	}
+
+	@GetMapping("/filtrar")
+	public String filtrar(ModelMap model, Long id) {
+		model.addAttribute("agencia", agenciaService.buscarPorId(this.getAgencia().getId()));
+		model.addAttribute("pacotes", agenciaService.buscarPorId(id).getPacotes());
 		return "pacote/lista";
 	}
 
@@ -103,10 +112,5 @@ public class PacoteController {
 	@ModelAttribute("agencias")
 	public List<Agencia> listaAgencia() {
 		return agenciaService.buscarTodos();
-	}
-	
-	@ModelAttribute("agencia")
-	public Agencia agenciaAtual() {
-		return this.getAgencia() == null ? null : agenciaService.buscarPorId(this.getAgencia().getId());
 	}
 }
