@@ -5,19 +5,6 @@
 <body>
 	<section class="layout-content" layout:fragment="corpo">
 
-		<nav class="navbar navbar-expand-md bg-light">
-			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><i class="oi oi-caret-right"></i>
-						<span th:text="#{compra.cadastrar.label}"></span></li>
-				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/compras/listar}"
-					role="button"> <span class="oi oi-spreadsheet" title="Listar"
-					aria-hidden="true"></span> <span th:text="#{compra.listar.label}"></span>
-				</a>
-			</div>
-		</nav>
-
 		<div class="container" id="cadastro">
 
 			<div th:replace="fragments/alert"></div>

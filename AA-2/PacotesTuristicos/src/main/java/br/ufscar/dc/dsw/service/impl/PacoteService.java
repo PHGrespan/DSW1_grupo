@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.IPacoteDAO;
+import br.ufscar.dc.dsw.domain.Agencia;
 import br.ufscar.dc.dsw.domain.Pacote;
 import br.ufscar.dc.dsw.service.spec.IPacoteService;
 
@@ -34,4 +35,5 @@ public class PacoteService implements IPacoteService{
 	public List<Pacote> buscarTodos() {
 		return dao.findAll();
 	}
+
 }
