@@ -47,7 +47,7 @@ public class PacoteController {
 
 	@GetMapping("/filtrar")
 	public String filtrar(ModelMap model, Long id) {
-		model.addAttribute("agencia", agenciaService.buscarPorId(this.getAgencia().getId()));
+		System.out.println("\n\n\nOPAAAAAAAAA\n\n\n" + id);
 		model.addAttribute("pacotes", agenciaService.buscarPorId(id).getPacotes());
 		return "pacote/lista";
 	}
@@ -70,20 +70,6 @@ public class PacoteController {
 		if (result.hasErrors()) {
 			return "pacote/cadastro";
 		}
-
-		pacoteService.salvar(pacote);
-		attr.addFlashAttribute("sucess", "Pacote inserido com sucesso");
-		return "redirect:/pacotes/listar";
-	}
-
-	@PostMapping("/salvarAgencia/{id}")
-	public String salvarAgencia(@Valid Pacote pacote, BindingResult result, RedirectAttributes attr) {
-
-		if (result.hasErrors()) {
-			return "pacote/cadastro";
-		}
-
-		pacote.setAgencia(this.getAgencia());
 
 		pacoteService.salvar(pacote);
 		attr.addFlashAttribute("sucess", "Pacote inserido com sucesso");
