@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}" xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{layout}" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head>
 <meta charset="UTF-8" />
 </head>
@@ -15,11 +17,24 @@
 					</li>
 				</ul>
 			</div>
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
 			<a class="btn btn-primary btn-md" th:href="@{/pacotes/cadastrar}" role="button"> 
 				<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> 
 				<span th:text="#{new.package}"></span>
 			</a>
+		</div>
+
+		<div sec:authorize="hasRole('ROLE_AGENCIA')">
+			<a class="btn btn-primary btn-md" th:href="@{/pacotes/cadastrar}" role="button"> 
+				<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> 
+				<span th:text="#{new.package}"></span>
+			</a>
+		</div>
 		</nav>
+
+
+	<div th:replace="fragments/modal :: modal"></div>
+
 
 		<div class="container" id="listagem">
 

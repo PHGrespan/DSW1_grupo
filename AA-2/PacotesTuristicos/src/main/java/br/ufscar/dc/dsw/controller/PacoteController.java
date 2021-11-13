@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,8 @@ public class PacoteController {
 	private IAgenciaService agenciaService;
 
 	@GetMapping("/cadastrar")
-	public String cadastrar(Pacote pacote) {
+	public String cadastrar(ModelMap model, Pacote pacote) {
+		model.addAttribute("agencia", this.getAgencia());
 		return "pacote/cadastro";
 	}
 
@@ -41,6 +43,19 @@ public class PacoteController {
 	public String listar(ModelMap model) {
 		model.addAttribute("pacotes", pacoteService.buscarTodos());
 		return "pacote/lista";
+	}
+
+	@GetMapping("/filtrar")
+	public String filtrar(ModelMap model, Long id) {
+		System.out.println("\n\n\nOPAAAAAAAAA\n\n\n" + id);
+		model.addAttribute("pacotes", agenciaService.buscarPorId(id).getPacotes());
+		return "pacote/lista";
+	}
+
+	private String getUsuario() {
+		UsuarioDetails UsuarioDetails = (UsuarioDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return UsuarioDetails.getUsuario().getFuncao();
+		
 	}
 
 	private Agencia getAgencia() {
@@ -61,24 +76,25 @@ public class PacoteController {
 		return "redirect:/pacotes/listar";
 	}
 
-	@PostMapping("/salvarAgencia/{id}")
-	public String salvarAgencia(@Valid Pacote pacote, BindingResult result, RedirectAttributes attr) {
+	@GetMapping("/editar/{id}")
+	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
 
-		if (result.hasErrors()) {
+		model.addAttribute("pacote", pacoteService.buscarPorId(id));
+
+		if(this.getUsuario().equals("ROLE_ADMIN")){
+		return "pacote/cadastro";
+	}
+		
+		else{
+		if(agenciaService.buscarPorId(this.getAgencia().getId()).getId().equals(pacoteService.buscarPorId(id).getAgencia().getId())){
+			model.addAttribute("agencia", agenciaService.buscarPorId(this.getAgencia().getId()));
 			return "pacote/cadastro";
 		}
 
-		pacote.setAgencia(this.getAgencia());
-
-		pacoteService.salvar(pacote);
-		attr.addFlashAttribute("sucess", "Pacote inserido com sucesso");
-		return "redirect:/pacotes/listar";
+		else{
+			return "redirect:/pacotes/listar";
+		}
 	}
-
-	@GetMapping("/editar/{id}")
-	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
-		model.addAttribute("pacote", pacoteService.buscarPorId(id));
-		return "pacote/cadastro";
 	}
 
 	@PostMapping("/editar")
@@ -103,10 +119,5 @@ public class PacoteController {
 	@ModelAttribute("agencias")
 	public List<Agencia> listaAgencia() {
 		return agenciaService.buscarTodos();
-	}
-	
-	@ModelAttribute("agencia")
-	public Agencia agenciaAtual() {
-		return this.getAgencia() == null ? null : agenciaService.buscarPorId(this.getAgencia().getId());
 	}
 }
