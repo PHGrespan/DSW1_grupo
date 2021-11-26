@@ -44,9 +44,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 				http.csrf().disable().authorizeRequests()
 				// REST
-				.antMatchers("/pacotes", "/agencias").permitAll()
-				.antMatchers("/pacotes/{\\d+}", "/agencias/{\\d+}").permitAll() 
-				// .antMatchers("/compras/clientes/{\\d+}").permitAll() 
+				.antMatchers("/clientes", "/agencias", "/pacotes").permitAll()
+				.antMatchers("/clientes/{\\d+}", "/agencias/{\\d+}").permitAll()
+				.antMatchers("/pacotes/agencias/{\\d+}").permitAll()
+				.antMatchers("/pacotes/clientes/{\\d+}").permitAll()
+				.antMatchers("/pacotes/destinos/{\\w+}").permitAll()
 				// 
 				.antMatchers("/error", "/login/**", "/js/**", "/css/**", "/image/**", "/webjars/**", "/agencias/listar", "/pacotes/listar").permitAll()
 				.antMatchers("/pacotes/cadastrar", "/pacotes/editar/**", "/pacotes/excluir/**", "/pacotes/salvar/**").hasAnyRole("AGENCIA", "ADMIN")
