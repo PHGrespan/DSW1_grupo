@@ -9,9 +9,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import br.ufscar.dc.dsw.validation.UniqueCPF;
 
 @SuppressWarnings("serial")
+@JsonIgnoreProperties(value = { "senha" })
 @Entity
 @Table(name = "Cliente")
 public class Cliente extends Usuario{
