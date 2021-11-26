@@ -8,7 +8,7 @@ Alunos:
 <br/>
 ## Executar o Projeto
 <br/>
-### AA-2
+### AA-3
 <br/>
 1. Para executar a segunda parte do projeto é necessário que esteja intalado o Maven, MySQL, Java 8 e Postman
 <br/>
