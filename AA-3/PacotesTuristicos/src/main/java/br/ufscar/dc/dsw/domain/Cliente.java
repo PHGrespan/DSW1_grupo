@@ -38,8 +38,6 @@ public class Cliente extends Usuario{
     @Column(nullable = true, length = 12)
     private String dataNasc;
 
-    @OneToMany(mappedBy = "cliente")
-    private List<Compra> compras;
 
     public String getCpf() {
         return this.cpf;
@@ -81,12 +79,5 @@ public class Cliente extends Usuario{
         this.dataNasc = dataNasc;
     }
 
-    public List<Compra> getCompra(){
-        return this.compras;
-    }
-
-    public void setCompra(List<Compra> compras){
-        this.compras = compras;
-    }
 
 }

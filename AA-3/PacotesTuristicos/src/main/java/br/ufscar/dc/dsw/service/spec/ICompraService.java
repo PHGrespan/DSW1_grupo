@@ -12,4 +12,6 @@ public interface ICompraService {
 	List<Compra> buscarTodosPorCliente(Cliente c);
 	
 	void salvar(Compra compra);
+
+	List<Compra> buscarTodosPorClienteId(Long id);
 }

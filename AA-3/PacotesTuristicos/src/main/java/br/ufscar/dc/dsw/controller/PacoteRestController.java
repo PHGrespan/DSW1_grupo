@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.ufscar.dc.dsw.domain.Agencia;
+import br.ufscar.dc.dsw.domain.Compra;
 import br.ufscar.dc.dsw.domain.Pacote;
 import br.ufscar.dc.dsw.service.spec.IAgenciaService;
+import br.ufscar.dc.dsw.service.spec.ICompraService;
 import br.ufscar.dc.dsw.service.spec.IPacoteService;
 
 @RestController
@@ -28,6 +30,9 @@ public class PacoteRestController {
     
 	@Autowired
 	private IPacoteService service;
+
+	@Autowired
+	private ICompraService service_compra;
 
     @Autowired
     private IAgenciaService agenciaService;
@@ -77,6 +82,15 @@ public class PacoteRestController {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(pacote);
+	}
+
+	@GetMapping(path = "/pacotes/clientes/{id}")
+	public ResponseEntity<List<Compra>> listaPorCliente(@PathVariable("id") long idCliente) {
+		List<Compra> compra = service_compra.buscarTodosPorClienteId(idCliente);
+		if (compra == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(compra);
 	}
 	
 	@GetMapping(path = "/pacotes/agencias/{id}")
